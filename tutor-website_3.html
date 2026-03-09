@@ -623,11 +623,68 @@
       font-size: .82rem;
     }
 
+    /* ─── NAV TOGGLE ─── */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text);
+      padding: .3rem .6rem;
+      border-radius: 6px;
+      line-height: 1;
+    }
+    .nav-toggle:hover { background: var(--accent-light); }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 720px) {
-      .hero { grid-template-columns: 1fr; padding-top: 3rem; }
+      /* NAV */
+      .nav-toggle { display: flex; align-items: center; }
+      nav { padding: 0 1rem; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 58px;
+        left: 0;
+        right: 0;
+        background: var(--surface);
+        border-bottom: 2px solid var(--border);
+        flex-direction: column;
+        gap: 0;
+        z-index: 99;
+        box-shadow: 0 4px 12px rgba(0,0,0,.1);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { border-bottom: 1px solid var(--border); }
+      .nav-links a { display: block; padding: .75rem 1.5rem; font-size: .95rem; }
+
+      /* HERO */
+      .hero { grid-template-columns: 1fr; padding-top: 2rem; }
+      .hero-card {
+        order: -1;
+        display: block;
+        max-width: 280px;
+        margin: 0 auto;
+        padding: 1.5rem 1.2rem 1.2rem;
+      }
+      .stat-row { gap: 1rem; }
+      .stat-num { font-size: 1.1rem; }
+
+      /* GALLERY */
+      .gallery-wrapper { max-width: 100%; gap: 0; }
+      .gallery-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        background: rgba(255,255,255,0.85);
+      }
+      .gallery-prev { right: 8px; }
+      .gallery-next { left: 8px; }
+
+      /* ABOUT */
       .about-grid { grid-template-columns: 1fr; }
-      .hero-card { display: none; }
     }
 
     /* ─── PANEL ANIMATION ─── */
@@ -641,6 +698,7 @@
 <nav>
   <div class="nav-inner">
     <a class="nav-logo" href="#">אלירן גלברג · מורה פרטי</a>
+    <button class="nav-toggle" id="navToggle" aria-label="תפריט">☰</button>
     <ul class="nav-links">
       <li><a href="#subjects">מקצועות</a></li>
       <li><a href="#bagrut">בגרות</a></li>
@@ -1271,7 +1329,23 @@
       const el = document.getElementById(id);
       if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     });
-  });  function torGo(n) { torCur = n; torUpdate(); }
+  });  // ─── HAMBURGER NAV ───
+  const navToggleBtn = document.getElementById('navToggle');
+  const navList = document.querySelector('.nav-links');
+  if (navToggleBtn) {
+    navToggleBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      navList.classList.toggle('open');
+    });
+    document.addEventListener('click', e => {
+      if (!e.target.closest('nav')) navList.classList.remove('open');
+    });
+    navList.querySelectorAll('a').forEach(a =>
+      a.addEventListener('click', () => navList.classList.remove('open'))
+    );
+  }
+
+  function torGo(n) { torCur = n; torUpdate(); }
   function torUpdate() {
     document.querySelector('.tor-track').style.transform = 'translateX(' + (torCur * 100) + '%)';
     document.querySelectorAll('.tor-dot').forEach((d,i) => {
