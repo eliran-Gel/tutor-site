@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>שאלוני בגרות — מדעי המחשב | אלירן גלברג</title>
+  <style>
+    :root {
+      --bg: #f9f8f6;
+      --surface: #ffffff;
+      --border: #e5e2db;
+      --text: #1a1a1a;
+      --muted: #6b6860;
+      --accent: #2c5f8a;
+      --accent-light: #e8f0f7;
+      --tag-cs: #1a5c3a;
+      --radius: 10px;
+      --shadow: 0 1px 4px rgba(0,0,0,0.07);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 58px;
+    }
+    .nav-logo {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .nav-back {
+      font-size: .85rem;
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      transition: color .2s;
+    }
+    .nav-back:hover { color: var(--accent); }
+
+    /* HERO */
+    .page-hero {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+    .page-hero-inner { max-width: 1100px; margin: auto; }
+    .page-hero h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: .4rem;
+    }
+    .page-hero h1 span { color: var(--accent); }
+    .page-hero p { color: var(--muted); font-size: .92rem; }
+    .hero-badge {
+      display: inline-block;
+      background: #daf0e7;
+      color: var(--tag-cs);
+      font-size: .78rem;
+      font-weight: 600;
+      padding: .25rem .85rem;
+      border-radius: 999px;
+      margin-bottom: .9rem;
+    }
+
+    /* MAIN */
+    main { max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+
+    /* SHALON SECTION */
+    .shalon-section {
+      margin-bottom: 2.5rem;
+    }
+    .shalon-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.1rem;
+      padding-bottom: .75rem;
+      border-bottom: 2px solid var(--border);
+    }
+    .shalon-num {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .shalon-tag {
+      font-size: .78rem;
+      background: #daf0e7;
+      color: var(--tag-cs);
+      padding: .2rem .65rem;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+    .shalon-count {
+      font-size: .8rem;
+      color: var(--muted);
+      margin-right: auto;
+    }
+
+    /* EXAM GRID */
+    .exam-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: .65rem;
+    }
+    .exam-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: .85rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .5rem;
+      text-decoration: none;
+      color: var(--text);
+      box-shadow: var(--shadow);
+      transition: box-shadow .2s, transform .15s, border-color .2s;
+    }
+    .exam-card:hover {
+      box-shadow: 0 4px 14px rgba(0,0,0,.1);
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+    .exam-year {
+      font-size: .9rem;
+      font-weight: 600;
+    }
+    .exam-moed {
+      font-size: .72rem;
+      color: var(--muted);
+      display: block;
+    }
+    .exam-icon {
+      font-size: .9rem;
+      color: var(--accent);
+      opacity: .6;
+      flex-shrink: 0;
+    }
+    .exam-card:hover .exam-icon { opacity: 1; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      padding: 1.8rem 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: .82rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .exam-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="tutor-website_3.html" class="nav-logo">אלירן גלברג · מורה פרטי</a>
+    <a href="tutor-website_3.html#bagrut" class="nav-back">← חזרה לאתר</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="hero-badge">⌨ מדעי המחשב</div>
+    <h1>שאלוני <span>בגרות</span></h1>
+    <p>כל השאלונים לפי מספר ושנה — לחץ לצפייה והורדה</p>
+  </div>
+</div>
+
+<main>
+
+  <!-- 899381 -->
+  <div class="shalon-section">
+    <div class="shalon-header">
+      <span class="shalon-num">שאלון 899381</span>
+      <span class="shalon-tag">מבנה נתונים</span>
+      <span class="shalon-count">12 מבחנים</span>
+    </div>
+    <div class="exam-grid">
+      <a class="exam-card" href="https://drive.google.com/file/d/1WKx5hfWTn8StTfyg2eGXMvlL89eRyBC7/view?usp=drive_link" target="_blank">
+        <div><span class="exam-year">2024</span></div>
+        <span class="exam-icon">📄</span>
+      </a>
+      <a class="exam-card" href="https://drive.google.com/file/d/1Wve8erUj5SgGTpzPKNtfjkWNqlXGPPmE/view?usp=drive_link" target="_blank">
+        <div><span class="exam-year">2023</span></div>
+        <span class="exam-icon">📄</span>
+      </a>
+      <a class="exam-card" href="https://drive.google.com/file/d/1s3C_NDbdVdfTHL22FpucLvFXR2dZ1Z5l/view?usp=drive_link" target="_blank">
+        <div><span class="exam-year">2022</span></div>
+        <span class="exam-icon">📄</span>
+      </a>
+      <a class="exam-card" href="https://drive.google.com/file/d/1A8ykqdSB7HyS_yI_hfwQWST2PTq7G8Df/view?usp=drive_link" target="_blank">
+        <div><span class="exam-year">2021</span><span class="exam-moed">מועד א׳</span></div>
+        <span class="exam-icon">📄</span>
+      </a>
+      <a class="exam-card" href="https://drive.google.com/file/d/1rw-mPleh7uertadEi1M6uekCxACf63tM/view?usp=drive_link" target="_blank">
+        <div><span class="exam-year">2021</span><span class="exam-moed">מועד ב׳</span></div>
+        <span class="exam-icon">📄</span>
+      </a>
+      <a class="exam-card" href="https://drive.google.com/file/d/1zIbF3de9Y8-CdweDSHfmBbVgHtsVGzzA/view?usp=drive_link" target="_blank">
+        <div><span class="exam-year">2020</span><span class="exam-moed">מועד א׳</span></div>
+        <span class="exam-icon">📄</span>
+      </a>
+      <a class="exam-card" href="https://drive.google.com/file/d/1UfgP5ReqERXq9adPEm2DaOdkxGzE79Px/view?usp=drive_link" target="_blank">
+        <div><span class="exam-year">2020</span><span class="exam-moed">מועד ב׳</span></div>
+        <span class="exam-icon">📄</span>
+      </a>
+      <a class="exam-card" href="https://drive.google.com/file/d/1VW5vkGLFx3CKqSYVTvm9e-9oLWyn8_At/view?usp=drive_link" target="_blank">
+        <div><span class="exam-year">2019</span></div>
+        <span class="exam-icon">📄</span>
+      </a>
+      <a class="exam-card" href="https://drive.google.com/file/d/1UgbZ97sTfC-rGrxQm-ldd5yrSzIA_UtX/view?usp=drive_link" target="_blank">
+        <div><span class="exam-year">2018</span></div>
+        <span class="exam-icon">📄</span>
+      </a>
+      <a class="exam-card" href="https://drive.google.com/file/d/1WNRzWK3_rymFEZCS9ZpuMVdjNTB47U4U/view?usp=drive_link" target="_blank">
+        <div><span class="exam-year">2017</span></div>
+        <span class="exam-icon">📄</span>
+      </a>
+      <a class="exam-card" href="https://drive.google.com/file/d/1-arTRR9eZBO4mfam1hyaIb4JkJjgYVdF/view?usp=drive_link" target="_blank">
+        <div><span class="exam-year">2016</span><span class="exam-moed">מועד א׳</span></div>
+        <span class="exam-icon">📄</span>
+      </a>
+      <a class="exam-card" href="https://drive.google.com/file/d/1LiPHr1a4YR56JVM84rA9JedVMj8kupYc/view?usp=drive_link" target="_blank">
+        <div><span class="exam-year">2016</span><span class="exam-moed">מועד ב׳</span></div>
+        <span class="exam-icon">📄</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- 899371 יסודות -->
+  <div class="shalon-section">
+    <div class="shalon-header">
+      <span class="shalon-num">שאלון 899371</span>
+      <span class="shalon-tag">יסודות מדעי המחשב</span>
+      <span class="shalon-count">3 מבחנים</span>
+    </div>
+    <div class="exam-grid">
+      <a class="exam-card" href="https://drive.google.com/file/d/1TvdlcAHigY8aWI5IHGaoyob7oM2j_2nM/view?usp=drive_link" target="_blank">
+        <div><span class="exam-year">2025</span></div>
+        <span class="exam-icon">📄</span>
+      </a>
+      <a class="exam-card" href="https://drive.google.com/file/d/1imjzEsEATQFWGkyKo-hK93iGNy3JIxr8/view?usp=drive_link" target="_blank">
+        <div><span class="exam-year">2024</span></div>
+        <span class="exam-icon">📄</span>
+      </a>
+      <a class="exam-card" href="https://drive.google.com/file/d/1shh5cUsk-zaTmuwG-q_no0XUgDza91Aq/view?usp=drive_link" target="_blank">
+        <div><span class="exam-year">2023</span></div>
+        <span class="exam-icon">📄</span>
+      </a>
+    </div>
+  </div>
+
+
+</main>
+
+<footer>
+  <p>© 2025 · אלירן גלברג · מורה פרטי — רמת פולג, נתניה · <a href="tel:+972586053334">058-6053334</a></p>
+</footer>
+
+</body>
+</html>
