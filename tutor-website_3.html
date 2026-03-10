@@ -4,27 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>אלירן גלברג | מורה פרטי — מתמטיקה, פיזיקה ומחשבים</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f9f8f6;
+      --bg: #edf1f7;
       --surface: #ffffff;
-      --border: #e5e2db;
-      --text: #1a1a1a;
-      --muted: #6b6860;
-      --accent: #2c5f8a;
-      --accent-light: #e8f0f7;
-      --tag-math: #1e4d6b;
-      --tag-physics: #3d2b6e;
-      --tag-cs: #1a5c3a;
-      --radius: 10px;
-      --shadow: 0 1px 4px rgba(0,0,0,0.07);
+      --border: #d0d9e8;
+      --text: #1a2744;
+      --muted: #5a6882;
+      --accent: #1e3a7f;
+      --accent-light: #dce5f5;
+      --tag-math: #1e3a7f;
+      --tag-physics: #5b21b6;
+      --tag-cs: #065f46;
+      --radius: 12px;
+      --shadow: 0 2px 8px rgba(30,58,127,0.08);
+      --yellow: #FACC15;
+      --navy-dark: #0d1e4d;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-      background: var(--bg);
+      font-family: 'Outfit', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(rgba(99,132,199,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99,132,199,0.07) 1px, transparent 1px);
+      background-size: 28px 28px;
       color: var(--text);
       font-size: 15px;
       line-height: 1.6;
@@ -32,8 +41,10 @@
 
     /* ─── NAV ─── */
     nav {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(208,217,232,0.7);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -49,7 +60,7 @@
     }
     .nav-logo {
       font-size: 1.05rem;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--accent);
       text-decoration: none;
       letter-spacing: -0.3px;
@@ -67,6 +78,7 @@
     }
     .nav-links a:hover { color: var(--accent); }
     .nav-wa-btn {
+      box-shadow: 0 4px 0 #15a349;
       display: inline-flex;
       align-items: center;
       gap: .4rem;
@@ -81,7 +93,7 @@
       transition: background .2s, transform .15s;
       flex-shrink: 0;
     }
-    .nav-wa-btn:hover { background: #1ebe5a; transform: scale(1.04); }
+    .nav-wa-btn:hover { background: #1ebe5a; transform: scale(1.04); box-shadow: 0 3px 0 #15a349; }
 
     /* ─── HERO ─── */
     .hero {
@@ -94,9 +106,9 @@
       align-items: center;
     }
     .hero-text h1 {
-      font-size: 2.4rem;
-      font-weight: 700;
-      line-height: 1.2;
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1.15;
       letter-spacing: -0.5px;
       margin-bottom: 1rem;
     }
@@ -110,26 +122,52 @@
     .hero-btns { display: flex; gap: .75rem; flex-wrap: wrap; }
     .btn {
       display: inline-block;
-      padding: .65rem 1.4rem;
-      border-radius: var(--radius);
-      font-size: .88rem;
-      font-weight: 500;
+      padding: .65rem 1.5rem;
+      border-radius: 10px;
+      font-size: .9rem;
+      font-weight: 600;
       cursor: pointer;
       text-decoration: none;
-      transition: background .2s, transform .15s;
+      transition: transform .1s ease, box-shadow .1s ease;
+      letter-spacing: 0.2px;
     }
-    .btn-primary { background: var(--accent); color: #fff; }
-    .btn-primary:hover { background: #22527a; }
-    .btn-outline { border: 1.5px solid var(--border); color: var(--text); background: transparent; }
-    .btn-outline:hover { background: var(--accent-light); border-color: var(--accent); color: var(--accent); }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 5px 0 var(--navy-dark), 0 6px 14px rgba(30,58,127,0.22);
+      transform: translateY(-2px);
+    }
+    .btn-primary:hover {
+      background: #162f6a;
+      transform: translateY(0px);
+      box-shadow: 0 2px 0 var(--navy-dark), 0 3px 8px rgba(30,58,127,0.18);
+    }
+    .btn-outline {
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      background: transparent;
+      box-shadow: 0 4px 0 rgba(30,58,127,0.2);
+      transform: translateY(-2px);
+    }
+    .btn-outline:hover {
+      background: var(--accent-light);
+      transform: translateY(0px);
+      box-shadow: 0 1px 0 rgba(30,58,127,0.15);
+    }
 
     .hero-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
+      background: #ffffff;
+      border: 2px solid var(--border);
+      border-top: 4px solid var(--yellow);
+      border-radius: 16px;
       padding: 2rem;
-      box-shadow: var(--shadow);
+      box-shadow: 6px 10px 30px rgba(30,58,127,0.12), 0 2px 6px rgba(0,0,0,0.05);
       text-align: center;
+      animation: float 5s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
     }
     .hero-avatar {
       width: 80px;
@@ -148,26 +186,44 @@
     .hero-card .subtitle { color: var(--muted); font-size: .85rem; margin-bottom: 1.25rem; }
     .stat-row { display: flex; justify-content: center; gap: 1.5rem; }
     .stat { text-align: center; }
-    .stat-num { font-size: 1.4rem; font-weight: 700; color: var(--accent); }
+    .stat-num { font-size: 1.5rem; font-weight: 800; color: var(--accent); }
     .stat-label { font-size: .75rem; color: var(--muted); }
 
     /* ─── SECTION ─── */
     section { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem; }
     .section-title {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: .4rem;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: .8rem;
+      color: var(--text);
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 56px;
+      height: 4px;
+      background: var(--yellow);
+      border-radius: 2px;
+      margin: 6px auto 0;
     }
     .section-sub {
       color: var(--muted);
-      font-size: .88rem;
-      margin-bottom: 1.8rem;
+      font-size: .9rem;
+      margin-bottom: 2rem;
     }
     hr.divider {
       border: none;
-      border-top: 1px solid var(--border);
       max-width: 1100px;
       margin: 0 auto;
+      height: 20px;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        repeating-linear-gradient(90deg, var(--border) 0, var(--border) 1px, transparent 1px, transparent 12px),
+        repeating-linear-gradient(90deg, var(--border) 0, var(--border) 1px, transparent 1px, transparent 60px);
+      background-size: 100% 8px, 12px 8px, 60px 14px;
+      background-position: center center, center center, center center;
+      background-repeat: no-repeat, repeat-x, repeat-x;
+      opacity: 0.5;
     }
 
     /* ─── TABS ─── */
@@ -188,9 +244,11 @@
       transition: all .2s;
     }
     .tab.active, .tab:hover {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
+      background: var(--yellow);
+      color: var(--text);
+      border-color: #e8b800;
+      box-shadow: 0 3px 0 #c9a400;
+      font-weight: 600;
     }
 
     /* ─── SUBJECT CARDS ─── */
@@ -200,14 +258,21 @@
       gap: 1rem;
     }
     .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
+      background: #fffef5;
+      border: 1px solid #e3dfc8;
       border-radius: var(--radius);
       padding: 1.4rem;
-      box-shadow: var(--shadow);
-      transition: box-shadow .2s, transform .15s;
+      box-shadow: 3px 5px 18px rgba(30,58,127,0.08), 0 1px 3px rgba(0,0,0,0.04);
+      transition: box-shadow .25s, transform .25s;
+      transform-origin: center center;
     }
-    .card:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.1); transform: translateY(-2px); }
+    .card:nth-child(3n+1) { transform: rotate(-0.7deg); }
+    .card:nth-child(3n+2) { transform: rotate(0.5deg); }
+    .card:nth-child(3n+3) { transform: rotate(-0.4deg); }
+    .card:hover {
+      box-shadow: 4px 10px 28px rgba(30,58,127,0.14);
+      transform: rotate(0deg) translateY(-4px) !important;
+    }
 
     .card-header {
       display: flex;
@@ -216,9 +281,9 @@
       margin-bottom: .85rem;
     }
     .card-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -258,9 +323,10 @@
     }
     .badge {
       font-size: .72rem;
-      padding: .2rem .6rem;
+      padding: .22rem .65rem;
       border-radius: 999px;
-      font-weight: 500;
+      font-weight: 600;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
     }
     .badge-math  { background: #dbeaf5; color: var(--tag-math); }
     .badge-phys  { background: #ece6f7; color: var(--tag-physics); }
@@ -314,11 +380,13 @@
       align-items: start;
     }
     .about-sidebar {
-      background: var(--surface);
-      border: 1px solid var(--border);
+      background: #fffef5;
+      border: 1px solid #e3dfc8;
+      border-top: 4px solid var(--yellow);
       border-radius: var(--radius);
       padding: 1.6rem;
       text-align: center;
+      box-shadow: 3px 5px 16px rgba(30,58,127,0.08);
     }
     .about-avatar {
       width: 90px;
@@ -342,11 +410,13 @@
     .about-body p { color: var(--muted); font-size: .9rem; margin-bottom: 1.2rem; }
     .about-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .5rem; }
     .about-tag {
-      background: var(--accent-light);
-      color: var(--accent);
+      background: var(--yellow);
+      color: var(--text);
       font-size: .78rem;
+      font-weight: 600;
       padding: .25rem .75rem;
       border-radius: 999px;
+      box-shadow: 0 2px 0 #c9a400;
     }
 
     /* ─── TESTIMONIALS ─── */
@@ -493,7 +563,7 @@
       transition: background .2s;
       line-height: 1;
     }
-    .gallery-btn:hover { background: var(--accent-light); }
+    .gallery-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
     .gallery-dots {
       display: flex;
       justify-content: center;
@@ -581,11 +651,12 @@
       margin-top: 2rem;
     }
     .quote-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
+      background: #fffef0;
+      border: none;
       border-radius: var(--radius);
+      border-top: 4px solid var(--yellow);
       padding: 1.4rem;
-      box-shadow: var(--shadow);
+      box-shadow: 3px 6px 16px rgba(0,0,0,0.09);
       display: flex;
       flex-direction: column;
       gap: 1rem;
@@ -631,11 +702,12 @@
 
     /* ─── FOOTER ─── */
     footer {
-      border-top: 1px solid var(--border);
-      background: var(--surface);
+      border-top: 2px solid var(--border);
+      background: #1a2744;
+      color: rgba(255,255,255,0.75) !important;
       padding: 1.8rem 2rem;
       text-align: center;
-      color: var(--muted);
+      color: rgba(255,255,255,0.65);
       font-size: .82rem;
     }
 
@@ -664,7 +736,7 @@
         top: 58px;
         left: 0;
         right: 0;
-        background: var(--surface);
+        background: rgba(255,255,255,0.96);
         border-bottom: 2px solid var(--border);
         flex-direction: column;
         gap: 0;
@@ -706,6 +778,48 @@
     /* ─── PANEL ANIMATION ─── */
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
+
+    /* ─── FAQ ─── */
+    .faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: .8rem; }
+    .faq-item {
+      background: #fffef5;
+      border: 1px solid #e3dfc8;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: box-shadow .2s;
+    }
+    .faq-item:hover { box-shadow: 0 4px 18px rgba(30,58,127,0.11); }
+    .faq-q {
+      width: 100%; text-align: right; background: none; border: none;
+      padding: 1.1rem 1.3rem;
+      font-family: inherit; font-size: 1rem; font-weight: 600;
+      color: var(--text); cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center; gap: .8rem;
+    }
+    .faq-q .faq-icon {
+      flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%;
+      background: var(--accent-light); color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; font-weight: 700; transition: transform .3s, background .3s;
+    }
+    .faq-item.open .faq-q .faq-icon {
+      transform: rotate(45deg);
+      background: var(--yellow); color: var(--navy-dark);
+    }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .35s ease, padding .3s;
+      padding: 0 1.3rem;
+      color: var(--muted); font-size: .92rem; line-height: 1.7;
+    }
+    .faq-item.open .faq-a { max-height: 200px; padding: 0 1.3rem 1.1rem; }
+    .faq-divider {
+      border: none;
+      border-top: 2px dashed rgba(30,58,127,0.12);
+      margin: 0 1.3rem;
+    }
+    .faq-item.open .faq-divider { display: none; }
   </style>
 </head>
 <body>
@@ -732,7 +846,7 @@
 <div class="hero">
   <div class="hero-text">
     <h1>הצלחה במתמטיקה,<br/>פיזיקה <span>&</span> מחשבים</h1>
-    <p>שיעורים פרטיים מותאמים אישית לכיתות ז׳–י״ב. שיטה ייחודית, כלים מקצועיים, תוצאות אמיתיות — פרונטלי או זום.</p>
+    <p>שיעורים פרטיים מותאמים אישית לכיתות ז׳–י״ב. שיטה ייחודית, סיכומי שיעור, זמינות לאורך כל היום, כלים מקצועיים, תוצאות אמיתיות — פרונטלי או זום.</p>
     <div class="hero-btns">
       <a href="https://wa.me/972586053334" target="_blank" class="btn btn-primary">📲 שלח וואטסאפ</a>
       <a href="#subjects" class="btn btn-outline">גלה את המקצועות</a>
@@ -1314,8 +1428,43 @@
   </div>
 </section>
 
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-title">שאלות נפוצות</div>
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">
+        <span>כיצד משלמים?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <hr class="faq-divider"/>
+      <div class="faq-a">ניתן לשלם במזומן או בפייבוקס — בנוחות שמתאימה לכם.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">
+        <span>כמה זמן ניתן לבטל מראש?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <hr class="faq-divider"/>
+      <div class="faq-a">ניתן לבטל עד 24 שעות לפני השיעור. לאחר מכן ייגבה 50% מהמחיר המקורי.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">
+        <span>עדיף בזום או פרונטלי?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <hr class="faq-divider"/>
+      <div class="faq-a">אני גמיש — ניתן כל פעם לשנות את אופי השיעור לבחירתכם. הן בזום והן פרונטלי השיעורים מתקיימים באופן המקצועי ביותר.</div>
+    </div>
+
+  </div>
+</section>
+
 <footer>
-  <p>© 2025 · אלירן גלברג · מורה פרטי — רמת פולג, נתניה · <a href="tel:+972586053334" style="color:var(--accent);text-decoration:none;">058-6053334</a></p>
+  <p>© 2025 · אלירן גלברג · מורה פרטי — רמת פולג, נתניה · <a href="tel:+972586053334" style="color:var(--yellow);text-decoration:none;">058-6053334</a></p>
 </footer>
 
 <script>
@@ -1423,6 +1572,24 @@ function openLightboxPDF(src){
   var url=URL.createObjectURL(blob);
   window.open(url,'_blank');
 }
+</script>
+
+<script>
+  // ─── FAQ ACCORDION ───
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
 </script>
 </body>
 </html>
