@@ -66,6 +66,22 @@
       transition: color .2s;
     }
     .nav-links a:hover { color: var(--accent); }
+    .nav-wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      background: #25d366;
+      color: #fff !important;
+      text-decoration: none;
+      font-size: .82rem;
+      font-weight: 600;
+      padding: .4rem .95rem;
+      border-radius: 20px;
+      white-space: nowrap;
+      transition: background .2s, transform .15s;
+      flex-shrink: 0;
+    }
+    .nav-wa-btn:hover { background: #1ebe5a; transform: scale(1.04); }
 
     /* ─── HERO ─── */
     .hero {
@@ -698,6 +714,7 @@
 <nav>
   <div class="nav-inner">
     <a class="nav-logo" href="#">אלירן גלברג · מורה פרטי</a>
+    <a href="https://wa.me/972586053334" target="_blank" class="nav-wa-btn">📲 וואטסאפ</a>
     <button class="nav-toggle" id="navToggle" aria-label="תפריט">☰</button>
     <ul class="nav-links">
       <li><a href="#subjects">מקצועות</a></li>
