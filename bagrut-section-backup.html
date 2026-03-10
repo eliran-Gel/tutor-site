@@ -1,0 +1,126 @@
+<!-- ====================================================
+   BAGRUT SECTION BACKUP
+   הוצא מהאתר הראשי — ניתן להחזיר בכל עת
+==================================================== -->
+
+<!-- nav item to restore inside <ul class="nav-links"> -->
+<!-- <li><a href="#bagrut">בגרות</a></li> -->
+
+<!-- CSS to restore inside <style> -->
+<style>
+    /* ─── BAGRUT SECTION ─── */
+    .bagrut-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: .8rem;
+    }
+    .bagrut-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: box-shadow .2s;
+    }
+    .bagrut-card:hover { box-shadow: 0 3px 10px rgba(0,0,0,0.09); }
+    .bagrut-info { display: flex; align-items: center; gap: .65rem; }
+    .bagrut-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot-math  { background: var(--tag-math); }
+    .dot-phys  { background: var(--tag-physics); }
+    .dot-cs    { background: var(--tag-cs); }
+    .bagrut-name { font-size: .88rem; font-weight: 500; }
+    .bagrut-year { font-size: .75rem; color: var(--muted); }
+    .bagrut-link {
+      font-size: .78rem;
+      color: var(--accent);
+      text-decoration: none;
+      padding: .25rem .7rem;
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      transition: background .2s;
+    }
+    .bagrut-link:hover { background: var(--accent-light); }
+</style>
+
+<!-- HTML section to restore before <footer> -->
+<!-- BAGRUT -->
+<section id="bagrut">
+  <div class="section-title">שאלוני בגרות</div>
+  <div class="section-sub">פתרונות לכל המקצועות — מסודרים לפי שאלון ושנה</div>
+
+  <div class="bagrut-grid">
+
+    <div class="bagrut-card">
+      <div class="bagrut-info">
+        <div class="bagrut-dot dot-math"></div>
+        <div>
+          <div class="bagrut-name">מתמטיקה 3 יח׳ (שאלון 371)</div>
+          <div class="bagrut-year">פתרונות לפי שנה</div>
+        </div>
+      </div>
+      <a class="bagrut-link" href="https://www.geva.co.il/bagrut_questionaire/%D7%A4%D7%AA%D7%A8%D7%95%D7%9F-%D7%91%D7%92%D7%A8%D7%95%D7%AA-%D7%9E%D7%AA%D7%9E%D7%98%D7%99%D7%A7%D7%94-%D7%A9%D7%90%D7%9C%D7%95%D7%9F-371/" target="_blank">כניסה ←</a>
+    </div>
+
+    <div class="bagrut-card">
+      <div class="bagrut-info">
+        <div class="bagrut-dot dot-math"></div>
+        <div>
+          <div class="bagrut-name">מתמטיקה 4 יח׳ (שאלון 471)</div>
+          <div class="bagrut-year">פתרונות לפי שנה</div>
+        </div>
+      </div>
+      <a class="bagrut-link" href="https://www.geva.co.il/bagrut_questionaire/%D7%A4%D7%AA%D7%A8%D7%95%D7%9F-%D7%91%D7%92%D7%A8%D7%95%D7%AA-%D7%9E%D7%AA%D7%9E%D7%98%D7%99%D7%A7%D7%94-%D7%A9%D7%90%D7%9C%D7%95%D7%9F-471/" target="_blank">כניסה ←</a>
+    </div>
+
+    <div class="bagrut-card">
+      <div class="bagrut-info">
+        <div class="bagrut-dot dot-math"></div>
+        <div>
+          <div class="bagrut-name">מתמטיקה 5 יח׳</div>
+          <div class="bagrut-year">פתרונות לפי שנה</div>
+        </div>
+      </div>
+      <a class="bagrut-link" href="https://www.geva.co.il/bagrut_solution/math/" target="_blank">כניסה ←</a>
+    </div>
+
+    <div class="bagrut-card">
+      <div class="bagrut-info">
+        <div class="bagrut-dot dot-phys"></div>
+        <div>
+          <div class="bagrut-name">פיזיקה</div>
+          <div class="bagrut-year">פתרונות לפי שנה</div>
+        </div>
+      </div>
+      <a class="bagrut-link" href="https://www.geva.co.il/bagrut_solution/physics/" target="_blank">כניסה ←</a>
+    </div>
+
+    <div class="bagrut-card">
+      <div class="bagrut-info">
+        <div class="bagrut-dot dot-cs"></div>
+        <div>
+          <div class="bagrut-name">מדעי המחשב — יסודות (899371)</div>
+          <div class="bagrut-year">שאלונים לפי שנה</div>
+        </div>
+      </div>
+      <a class="bagrut-link" href="cs-bagrut.html" target="_blank">כניסה ←</a>
+    </div>
+
+    <div class="bagrut-card">
+      <div class="bagrut-info">
+        <div class="bagrut-dot dot-cs"></div>
+        <div>
+          <div class="bagrut-name">מדעי המחשב — מבנה נתונים (899381)</div>
+          <div class="bagrut-year">שאלונים לפי שנה</div>
+        </div>
+      </div>
+      <a class="bagrut-link" href="cs-bagrut.html" target="_blank">כניסה ←</a>
+    </div>
+
+  </div>
+</section>
