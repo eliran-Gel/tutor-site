@@ -891,41 +891,6 @@
     <span class="dot" onclick="goToSlide(8)"></span>
   </div>
 
-  <div class="quotes-grid">
-
-    <div class="quote-card">
-      <div class="quote-text">״אלירן הסביר לי את כל הנושא של אינטגרל מתחילה בצורה הכי ברורה שהייתה לי. אחרי שיעור אחד הבנתי מה שלא הבנתי חצי שנה. ממש שינה לי את הראש.״</div>
-      <div class="quote-meta">
-        <span class="quote-grade">כיתה י״ב</span>
-        <span class="quote-subject badge-math-q">מתמטיקה 5 יח׳</span>
-      </div>
-    </div>
-
-    <div class="quote-card">
-      <div class="quote-text">״השיעורים שלו שונים מכל מורה שהיה לי — הוא שולח סיכום אחרי כל שיעור, זמין בוואטסאפ לכל שאלה, ותמיד מוצאים ביחד את הפתרון. הציון שלי עלה מ-70 ל-90 תוך חודשיים.״</div>
-      <div class="quote-meta">
-        <span class="quote-grade">כיתה י״א</span>
-        <span class="quote-subject badge-phys-q">פיזיקה</span>
-      </div>
-    </div>
-
-    <div class="quote-card">
-      <div class="quote-text">״לא הבנתי בכלל פייתון בהתחלה, אבל אלירן הסביר לי צעד צעד עם דוגמאות ותרגילים. היום אני מגיש עבודות בלי בעיה ויודע ממש להסביר את הקוד.״</div>
-      <div class="quote-meta">
-        <span class="quote-grade">כיתה ט׳</span>
-        <span class="quote-subject badge-cs-q">מדעי המחשב</span>
-      </div>
-    </div>
-
-    <div class="quote-card">
-      <div class="quote-text">״אני בכיתה ח׳ ותמיד פחדתי ממתמטיקה. אלירן לא רק לימד אותי — הוא נתן לי ביטחון. עכשיו אני מחכה לשיעורים.״</div>
-      <div class="quote-meta">
-        <span class="quote-grade">כיתה ח׳</span>
-        <span class="quote-subject badge-math-q">מתמטיקה</span>
-      </div>
-    </div>
-
-  </div>
 </section>
 
 <hr class="divider"/>
@@ -940,8 +905,8 @@
 
   <!-- Tab filter -->
   <div class="tabs" id="gradeTabs">
-    <button class="tab active" data-filter="all">הכל</button>
-    <button class="tab" data-filter="middle">חטיבת ביניים (ז׳–ט׳)</button>
+    <button class="tab" data-filter="all">הכל</button>
+    <button class="tab active" data-filter="middle">חטיבת ביניים (ז׳–ט׳)</button>
     <button class="tab" data-filter="high">תיכון (י׳–י״ב)</button>
     <button class="tab" data-filter="math">מתמטיקה</button>
     <button class="tab" data-filter="physics">פיזיקה</button>
@@ -1081,7 +1046,6 @@
         <li>שימור אנרגיה ותנע</li>
         <li>חשמל ומגנטיות</li>
         <li>גלים ואופטיקה</li>
-        <li>פיזיקה מודרנית וקוונטים</li>
       </ul>
       <div class="card-badges">
         <span class="badge badge-phys">כיתה י׳</span>
@@ -1362,17 +1326,17 @@
   // ─── TAB FILTER ───
   const tabs = document.querySelectorAll('.tab');
   const cards = document.querySelectorAll('.card');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      const filter = tab.dataset.filter;
-      cards.forEach(card => {
-        const tags = card.dataset.tags || '';
-        card.style.display = (filter === 'all' || tags.split(' ').includes(filter)) ? '' : 'none';
-      });
+  function applyFilter(filter) {
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.filter === filter));
+    cards.forEach(card => {
+      const tags = card.dataset.tags || '';
+      card.style.display = (filter === 'all' || tags.split(' ').includes(filter)) ? '' : 'none';
     });
+  }
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => applyFilter(tab.dataset.filter));
   });
+  applyFilter('middle');
 
   // ─── GALLERY ───
   let currentSlide = 0;
