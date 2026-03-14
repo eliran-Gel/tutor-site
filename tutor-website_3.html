@@ -1455,7 +1455,13 @@ function openLightbox(src){
   lb.style.display='flex';
 }
 function openLightboxPDF(src){
-  window.open(src,'_blank');
+  var lb=document.getElementById('lbx');
+  var img=document.getElementById('lbx-img');
+  var pdf=document.getElementById('lbx-pdf');
+  pdf.src=src; pdf.style.display='block';
+  img.style.display='none';
+  lb.style.cursor='default';
+  lb.style.display='flex';
 }
 </script>
 
