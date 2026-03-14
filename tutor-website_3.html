@@ -1325,7 +1325,7 @@
 <script>
   // ─── TAB FILTER ───
   const tabs = document.querySelectorAll('.tab');
-  const cards = document.querySelectorAll('.card');
+  const cards = document.querySelectorAll('#cardsGrid .card');
   function applyFilter(filter) {
     tabs.forEach(t => t.classList.toggle('active', t.dataset.filter === filter));
     cards.forEach(card => {
