@@ -95,6 +95,29 @@
     }
     .nav-wa-btn:hover { background: #1ebe5a; transform: scale(1.04); box-shadow: 0 3px 0 #15a349; }
 
+    .nav-portal-btn {
+      color: var(--accent) !important;
+      font-weight: 700 !important;
+    }
+    @media (min-width: 721px) {
+      .nav-portal-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: .35rem;
+        background: var(--accent);
+        color: #fff !important;
+        padding: .4rem 1rem;
+        border-radius: 20px;
+        box-shadow: 0 4px 0 var(--navy-dark);
+        transition: transform .1s ease, box-shadow .1s ease;
+      }
+      .nav-portal-btn:hover {
+        transform: translateY(2px);
+        box-shadow: 0 2px 0 var(--navy-dark);
+        color: #fff !important;
+      }
+    }
+
     /* ─── HERO ─── */
     .hero {
       max-width: 1100px;
@@ -841,6 +864,7 @@
     <a href="https://wa.me/972586053334" target="_blank" class="nav-wa-btn">📲 וואטסאפ</a>
     <button class="nav-toggle" id="navToggle" aria-label="תפריט">☰</button>
     <ul class="nav-links">
+      <li><a href="https://app.elirangelberg.com" class="nav-portal-btn">🔑 כניסה למערכת</a></li>
       <li><a href="#testimonials">חוות דעת</a></li>
       <li><a href="#subjects">מקצועות</a></li>
       <li><a href="#preview">חומרי לימוד</a></li>
