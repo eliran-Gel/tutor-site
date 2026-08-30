@@ -103,25 +103,31 @@
       box-sizing: border-box;
     }
     /* Deliberately breaks from the navy .btn-primary look used everywhere
-       else on the page - yellow + a slight tilt, so this one CTA (the
+       else on the page - violet + a slight tilt, so this one CTA (the
        actual product, not just a marketing link) doesn't blend into the
-       row of navy buttons around it. */
+       row of navy buttons around it. Violet instead of yellow: the key
+       emoji itself renders yellow/gold, so a yellow button swallowed it -
+       violet (already used for the physics tag elsewhere on the page)
+       makes the emoji pop instead of disappearing into the background. */
     .btn.portal-btn {
-      background: var(--yellow);
-      color: var(--navy-dark) !important;
-      border: 2px solid var(--navy-dark);
+      background: var(--tag-physics);
+      color: #fff !important;
+      border: 2px solid #3b0f8a;
       border-radius: 999px;
-      box-shadow: 0 4px 0 #c9a400;
+      box-shadow: 0 4px 0 #3b0f8a;
       transform: rotate(-1.5deg);
+      font-size: 1.15rem;
+      font-weight: 800;
+      padding: .9rem 1.5rem;
     }
     .btn.portal-btn:hover {
-      background: var(--yellow);
+      background: var(--tag-physics);
       transform: rotate(0deg) translateY(-2px);
-      box-shadow: 0 6px 0 #c9a400;
+      box-shadow: 0 6px 0 #3b0f8a;
     }
     .btn.portal-btn:active {
       transform: rotate(0deg) translateY(2px);
-      box-shadow: 0 1px 0 #c9a400;
+      box-shadow: 0 1px 0 #3b0f8a;
     }
 
     /* ─── HERO ─── */
