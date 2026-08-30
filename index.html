@@ -102,6 +102,27 @@
       text-align: center;
       box-sizing: border-box;
     }
+    /* Deliberately breaks from the navy .btn-primary look used everywhere
+       else on the page - yellow + a slight tilt, so this one CTA (the
+       actual product, not just a marketing link) doesn't blend into the
+       row of navy buttons around it. */
+    .btn.portal-btn {
+      background: var(--yellow);
+      color: var(--navy-dark) !important;
+      border: 2px solid var(--navy-dark);
+      border-radius: 999px;
+      box-shadow: 0 4px 0 #c9a400;
+      transform: rotate(-1.5deg);
+    }
+    .btn.portal-btn:hover {
+      background: var(--yellow);
+      transform: rotate(0deg) translateY(-2px);
+      box-shadow: 0 6px 0 #c9a400;
+    }
+    .btn.portal-btn:active {
+      transform: rotate(0deg) translateY(2px);
+      box-shadow: 0 1px 0 #c9a400;
+    }
 
     /* ─── HERO ─── */
     .hero {
@@ -879,7 +900,7 @@
       <div class="stat"><div class="stat-num">10</div><div class="stat-label">יח׳ מחשבים</div></div>
       <div class="stat"><div class="stat-num">5</div><div class="stat-label">יח׳ פיזיקה</div></div>
     </div>
-    <a href="https://app.elirangelberg.com" class="btn btn-primary portal-btn">🔑 מעבר לאיזור האישי</a>
+    <a href="https://app.elirangelberg.com" class="btn portal-btn">🔑 מעבר לאיזור האישי</a>
   </div>
 </div>
 
