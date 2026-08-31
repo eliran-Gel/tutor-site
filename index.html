@@ -859,7 +859,10 @@
       padding: 0 1.3rem;
       color: var(--muted); font-size: .92rem; line-height: 1.7;
     }
-    .faq-item.open .faq-a { max-height: 200px; padding: 0 1.3rem 1.1rem; }
+    /* Must clear the tallest answer at the narrowest width - the cancellation
+       policy answer alone measures ~225px on a 375px screen, so the old
+       200px clamp silently cut off its last line. */
+    .faq-item.open .faq-a { max-height: 420px; padding: 0 1.3rem 1.1rem; }
     .faq-divider {
       border: none;
       border-top: 2px dashed rgba(30,58,127,0.12);
@@ -1395,7 +1398,7 @@
         <span class="faq-icon">+</span>
       </button>
       <hr class="faq-divider"/>
-      <div class="faq-a">ניתן לבטל עד 24 שעות לפני השיעור. לאחר מכן ייגבה 50% מהמחיר המקורי.</div>
+      <div class="faq-a">ביטול עד 24 שעות לפני השיעור — ללא חיוב כלל.<br/>ביטול בין שעה ל-24 שעות לפני — ייגבו 50% מהמחיר.<br/>ביטול פחות משעה לפני השיעור — ייגבה התשלום המלא.<br/><br/>אם אני מבטל שיעור מכל סיבה שהיא — אין חיוב בכלל.</div>
     </div>
 
     <div class="faq-item">
