@@ -913,6 +913,55 @@
       margin: 0 1.3rem;
     }
     .faq-item.open .faq-divider { display: none; }
+
+    /* ─── LEAD FORM ─── */
+    .lead-card {
+      max-width: 560px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-top: 4px solid var(--accent);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 6px 10px 30px rgba(30,58,127,0.1), 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .lead-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; margin-top: 1.2rem; }
+    .lead-field { display: flex; flex-direction: column; gap: .35rem; }
+    .lead-field.full { grid-column: 1 / -1; }
+    .lead-field label { font-size: .82rem; font-weight: 600; color: var(--text); }
+    .lead-field input,
+    .lead-field select,
+    .lead-field textarea {
+      font-family: inherit;
+      font-size: .92rem;
+      padding: .6rem .75rem;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .lead-field input:focus,
+    .lead-field select:focus,
+    .lead-field textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .lead-field textarea { resize: vertical; min-height: 4.5rem; }
+    /* Honeypot - present in the DOM (so a bot filling every field finds
+       it) but never visible or reachable by a real visitor tabbing
+       through the form. display:none is deliberately NOT used here -
+       some bots specifically skip hidden fields, this doesn't. */
+    .lead-hp {
+      position: absolute;
+      width: 1px; height: 1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+    }
+    .lead-submit-row { margin-top: 1.3rem; display: flex; justify-content: center; }
+    .lead-msg { margin-top: 1rem; text-align: center; font-size: .9rem; }
+    .lead-msg.success { color: #1a7a4a; }
+    .lead-msg.error { color: #b3261e; }
   </style>
 </head>
 <body>
@@ -931,6 +980,7 @@
       <li><a href="#about">אודות</a></li>
       <li><a href="#contact">צור קשר</a></li>
       <li><a href="#faq">שאלות ותשובות</a></li>
+      <li><a href="#contact-form">השאירו פרטים</a></li>
     </ul>
   </div>
 </nav>
@@ -1457,6 +1507,54 @@
   </div>
 </section>
 
+<hr class="divider"/>
+
+<!-- LEAD FORM -->
+<section id="contact-form">
+  <div class="section-title">מתעניינים? השאירו פרטים</div>
+  <div class="section-sub">חוזרים אליכם באותו יום - בלי התחייבות</div>
+
+  <div class="lead-card">
+    <form id="leadForm">
+      <div class="lead-grid">
+        <div class="lead-field full">
+          <label for="lead-name">שם מלא *</label>
+          <input type="text" id="lead-name" name="full_name" required maxlength="100" autocomplete="name"/>
+        </div>
+        <div class="lead-field full">
+          <label for="lead-phone">טלפון *</label>
+          <input type="tel" id="lead-phone" name="phone" required pattern="0[0-9]{8,9}" placeholder="05XXXXXXXX" autocomplete="tel"/>
+        </div>
+        <div class="lead-field full">
+          <label for="lead-grade">כיתה</label>
+          <select id="lead-grade" name="grade">
+            <option value="">בחרו כיתה</option>
+            <option value="ז׳">ז׳</option>
+            <option value="ח׳">ח׳</option>
+            <option value="ט׳">ט׳</option>
+            <option value="י׳">י׳</option>
+            <option value="י״א">י״א</option>
+            <option value="י״ב">י״ב</option>
+            <option value="אחר">אחר</option>
+          </select>
+        </div>
+        <div class="lead-field full">
+          <label for="lead-message">מה תרצו לספר לי? (לא חובה)</label>
+          <textarea id="lead-message" name="message" maxlength="500" placeholder="באיזה מקצוע צריך עזרה, מתי נוח, וכו׳"></textarea>
+        </div>
+        <div class="lead-field lead-hp" aria-hidden="true">
+          <label for="lead-website">Website</label>
+          <input type="text" id="lead-website" name="website" tabindex="-1" autocomplete="off"/>
+        </div>
+      </div>
+      <div class="lead-submit-row">
+        <button type="submit" class="btn btn-primary" id="leadSubmitBtn">שליחת פרטים</button>
+      </div>
+      <div id="leadMsg" class="lead-msg" style="display:none;"></div>
+    </form>
+  </div>
+</section>
+
 <footer>
   <p>© 2026 · אלירן גלברג · מורה פרטי — רמת פולג, נתניה · <a href="tel:+972586053334" style="color:var(--yellow);text-decoration:none;">058-6053334</a></p>
 </footer>
@@ -1592,6 +1690,53 @@ function openLightboxPDF(src){
         btn.setAttribute('aria-expanded', 'true');
       }
     });
+  });
+</script>
+
+<script>
+  // ─── LEAD FORM ───
+  document.getElementById('leadForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = document.getElementById('leadSubmitBtn');
+    const msg = document.getElementById('leadMsg');
+    msg.style.display = 'none';
+
+    const payload = {
+      full_name: form.full_name.value.trim(),
+      phone: form.phone.value.trim(),
+      grade: form.grade.value,
+      message: form.message.value.trim(),
+      website: form.website.value, // honeypot
+    };
+
+    btn.disabled = true;
+    btn.textContent = 'שולח...';
+
+    try {
+      const res = await fetch('https://app.elirangelberg.com/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.success) {
+        form.reset();
+        msg.textContent = 'תודה! קיבלתי את הפרטים שלך ואחזור אליך בהקדם 🙌';
+        msg.className = 'lead-msg success';
+      } else {
+        msg.textContent = (data && data.error) || 'משהו השתבש - אפשר גם לשלוח לי הודעה בוואטסאפ למעלה.';
+        msg.className = 'lead-msg error';
+      }
+    } catch (err) {
+      msg.textContent = 'לא הצלחנו לשלוח - בדקו את החיבור לאינטרנט, או שלחו לי הודעה בוואטסאפ למעלה.';
+      msg.className = 'lead-msg error';
+    } finally {
+      msg.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'שליחת פרטים';
+    }
   });
 </script>
 </body>
