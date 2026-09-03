@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>אלירן גלברג | מורה פרטי — מתמטיקה, פיזיקה ומחשבים</title>
 
-  <!-- Google Analytics (GA4) - unchanged -->
+  <!-- Google Analytics (GA4) - checklist #3, docs/BUSINESS_AUDIT_CHECKLIST.md -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZDCJGZPZL"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -17,9 +17,9 @@
   <meta name="description" content="אלירן גלברג, מורה פרטי למתמטיקה, פיזיקה ומדעי המחשב לכיתות ז׳–י״ב ברמת פולג, נתניה - פרונטלי או בזום. שיטה ייחודית, סיכומי שיעור, שיעורי בית וזמינות מלאה לשאלות."/>
   <meta name="keywords" content="מורה פרטי, מתמטיקה, פיזיקה, מדעי המחשב, נתניה, רמת פולג, שיעורים פרטיים, בגרות"/>
   <link rel="canonical" href="https://elirangelberg.com/"/>
-  <meta name="theme-color" content="#173B5F"/>
+  <meta name="theme-color" content="#1e3a7f"/>
 
-  <!-- Open Graph / WhatsApp / Facebook link previews - unchanged -->
+  <!-- Open Graph / WhatsApp / Facebook link previews -->
   <meta property="og:type" content="website"/>
   <meta property="og:locale" content="he_IL"/>
   <meta property="og:site_name" content="אלירן גלברג - מורה פרטי"/>
@@ -28,12 +28,15 @@
   <meta property="og:url" content="https://elirangelberg.com/"/>
   <meta property="og:image" content="https://elirangelberg.com/images/img_1.jpg"/>
 
+  <!-- Twitter/X card (falls back to the same OG tags almost everywhere, but
+       some link-preview bots only look for these) -->
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="אלירן גלברג | מורה פרטי - מתמטיקה, פיזיקה ומחשבים"/>
   <meta name="twitter:description" content="שיעורים פרטיים מותאמים אישית לכיתות ז׳–י״ב - פרונטלי ברמת פולג נתניה, או בזום לכל הארץ."/>
   <meta name="twitter:image" content="https://elirangelberg.com/images/img_1.jpg"/>
 
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23173B5F'/%3E%3Ctext x='50' y='70' font-size='58' text-anchor='middle'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E"/>
+  <!-- Inline SVG favicon - no separate icon file needed -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231e3a7f'/%3E%3Ctext x='50' y='70' font-size='58' text-anchor='middle'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E"/>
 
   <script type="application/ld+json">
   {
@@ -56,896 +59,1687 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Assistant:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* ══════════════════ DESIGN FOUNDATION ══════════════════ */
     :root {
-      /* Color */
-      --cream: #F7F3EA;
-      --beige: #EDE6D8;
-      --ink: #17202A;
-      --navy: #173B5F;
-      --navy-deep: #0E2740;
-      --orange: #E89B45;
-      --orange-deep: #C97E2E;
-      --muted: #66717C;
-      --border: #DDD7CC;
-      --white: #FFFFFF;
-
-      /* Type */
-      --font-display: 'Frank Ruhl Libre', Georgia, serif;
-      --font-body: 'Assistant', 'Segoe UI', sans-serif;
-      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-
-      /* Space + radius - moderate, not "everything is a pill" */
-      --radius-sm: 4px;
-      --radius-md: 8px;
-      --radius-lg: 14px;
-      --container: 1180px;
-      --gutter: clamp(1.25rem, 4vw, 3rem);
+      --bg: #edf1f7;
+      --surface: #ffffff;
+      --border: #d0d9e8;
+      --text: #1a2744;
+      --muted: #5a6882;
+      --accent: #1e3a7f;
+      --accent-light: #dce5f5;
+      --tag-math: #1e3a7f;
+      --tag-physics: #5b21b6;
+      --tag-cs: #065f46;
+      --radius: 12px;
+      --shadow: 0 2px 8px rgba(30,58,127,0.08);
+      --yellow: #FACC15;
+      --navy-dark: #0d1e4d;
     }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      margin: 0;
-      font-family: var(--font-body);
-      background: var(--cream);
-      color: var(--ink);
-      font-size: 17px;
+      font-family: 'Outfit', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(rgba(99,132,199,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99,132,199,0.07) 1px, transparent 1px);
+      background-size: 28px 28px;
+      color: var(--text);
+      font-size: 15px;
       line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
     }
 
-    img { max-width: 100%; display: block; }
-    a { color: inherit; }
-
-    h1, h2, h3 {
-      font-family: var(--font-display);
-      font-weight: 700;
-      line-height: 1.18;
-      letter-spacing: -0.01em;
-      margin: 0;
+    /* ─── NAV ─── */
+    nav {
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(208,217,232,0.7);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 2rem;
     }
-
-    .container { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
-
-    .eyebrow {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      color: var(--orange-deep);
-      text-transform: uppercase;
-      margin: 0 0 0.9rem;
-    }
-
-    .section-lede {
-      color: var(--muted);
-      font-size: 1.05rem;
-      max-width: 34rem;
-      margin: 1rem 0 0;
-    }
-
-    /* ─── Buttons: confident, simple, no glow/gradient/giant pills ─── */
-    .btn {
-      display: inline-flex;
+    .nav-inner {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
       align-items: center;
-      gap: 0.5rem;
-      font-family: var(--font-body);
-      font-weight: 600;
-      font-size: 0.98rem;
-      padding: 0.85rem 1.7rem;
-      border-radius: var(--radius-md);
-      text-decoration: none;
-      border: 1.5px solid transparent;
-      cursor: pointer;
-      transition: background-color .18s ease, color .18s ease, border-color .18s ease, transform .18s ease;
-    }
-    .btn-primary { background: var(--navy); color: var(--cream); }
-    .btn-primary:hover { background: var(--navy-deep); transform: translateY(-1px); }
-    .btn-outline { background: transparent; color: var(--navy); border-color: var(--navy); }
-    .btn-outline:hover { background: var(--navy); color: var(--cream); }
-    .btn-text {
-      background: none; border: none; color: var(--navy); font-weight: 600;
-      text-decoration: underline; text-underline-offset: 3px; padding: 0; cursor: pointer;
-    }
-
-    /* ─── Reveal-on-scroll: one fade + 10px lift, once, no bounce ─── */
-    .reveal { opacity: 0; transform: translateY(10px); transition: opacity .5s ease, transform .5s ease; }
-    .reveal.in { opacity: 1; transform: translateY(0); }
-
-    /* ─── Section rhythm ─── */
-    section { padding: clamp(3.5rem, 7vw, 6.5rem) 0; }
-    .rule {
-      border: none; height: 1px; background: var(--border);
-      max-width: var(--container); margin: 0 auto;
-    }
-
-    /* ══════════════════ NAV ══════════════════ */
-    header.site-nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(247,243,234,0.92);
-      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-row {
-      max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter);
-      height: 68px; display: flex; align-items: center; justify-content: space-between;
+      justify-content: space-between;
+      height: 58px;
     }
     .nav-logo {
-      font-family: var(--font-display); font-weight: 700; font-size: 1.15rem;
-      color: var(--ink); text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: -0.3px;
     }
-    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; margin: 0; padding: 0; }
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+    }
     .nav-links a {
-      color: var(--muted); text-decoration: none; font-size: 0.94rem; font-weight: 500;
-      transition: color .15s ease;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: color .2s;
     }
-    .nav-links a:hover { color: var(--ink); }
-    .nav-cta { flex-shrink: 0; }
-    .nav-toggle {
-      display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer;
-      color: var(--ink); padding: .3rem .5rem;
-    }
-    /* Base rule, not inside the media query below - otherwise the drawer
-       had no display:none at desktop widths at all and rendered as a
-       second nav row permanently visible above 860px. */
-    .nav-drawer { display: none; }
-
-    @media (max-width: 860px) {
-      .nav-links:not(.nav-cta-wrap) { display: none; }
-      .nav-toggle { display: block; }
-      .nav-drawer {
-        position: absolute; inset-inline: 0; top: 68px;
-        background: var(--cream); border-bottom: 1px solid var(--border);
-        flex-direction: column; padding: 0.5rem var(--gutter) 1.5rem; gap: 0;
-      }
-      .nav-drawer.open { display: flex; }
-      .nav-drawer a { display: block; padding: 0.85rem 0; border-bottom: 1px solid var(--border); font-size: 1.02rem; }
-      .nav-drawer .btn { margin-top: 1rem; width: 100%; justify-content: center; }
-    }
-
-    /* ══════════════════ HERO ══════════════════ */
-    .hero {
-      max-width: var(--container); margin: 0 auto; padding: clamp(2rem, 5vw, 4rem) var(--gutter) 0;
-      display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(1.5rem, 4vw, 3rem);
-      align-items: end;
-    }
-    .hero-copy { padding-bottom: clamp(1.5rem, 4vw, 3rem); }
-    .hero-copy h1 {
-      font-size: clamp(2.5rem, 5.2vw, 4rem);
-      margin-bottom: 1.3rem;
-    }
-    .hero-copy h1 em {
-      font-style: normal; color: var(--orange-deep);
-    }
-    .hero-copy p {
-      color: var(--muted); font-size: 1.12rem; max-width: 30rem; margin: 0 0 2rem;
-    }
-    .hero-ctas { display: flex; flex-wrap: wrap; gap: 0.9rem; }
-
-    .hero-photo-wrap {
-      position: relative;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      aspect-ratio: 3 / 4;
-      background: var(--beige);
-    }
-    .hero-photo-wrap img {
-      width: 100%; height: 100%; object-fit: cover; object-position: center 20%;
-    }
-    .hero-tag {
-      position: absolute; bottom: 1.1rem; right: 1.1rem;
-      background: var(--cream); border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 0.7rem 1.1rem;
-      font-family: var(--font-mono); font-size: 0.8rem; color: var(--navy);
-      box-shadow: 0 6px 20px rgba(23,32,42,0.12);
-    }
-    .hero-unit-strip {
-      grid-column: 1 / -1;
-      display: flex; flex-wrap: wrap; gap: clamp(1.5rem, 5vw, 3.5rem);
-      border-top: 1px solid var(--border);
-      margin-top: clamp(1.5rem, 4vw, 3rem);
-      padding-top: 1.6rem;
-    }
-    .unit { display: flex; align-items: baseline; gap: 0.5rem; }
-    .unit b { font-family: var(--font-display); font-size: 1.9rem; color: var(--navy); }
-    .unit span { color: var(--muted); font-size: 0.9rem; }
-
-    @media (max-width: 860px) {
-      .hero { grid-template-columns: 1fr; align-items: stretch; }
-      .hero-copy { order: 2; padding-bottom: 0; margin-top: 1.75rem; }
-      .hero-photo-wrap { order: 1; aspect-ratio: 4/5; }
-      /* Without an explicit order this defaulted to 0 - lower than both
-         siblings above - so the stat strip jumped to the very top of the
-         hero on mobile instead of staying below everything, as intended. */
-      .hero-unit-strip { order: 3; }
-    }
-
-    /* ══════════════════ ACHIEVEMENTS ══════════════════ */
-    .achievements { background: var(--navy); color: var(--cream); }
-    .ach-grid {
-      display: flex; flex-wrap: wrap; gap: clamp(2rem, 6vw, 4.5rem);
-      justify-content: space-between;
-    }
-    .ach-item { min-width: 130px; }
-    .ach-item b {
-      display: block; font-family: var(--font-display); font-size: clamp(2.6rem, 6vw, 3.6rem);
-      line-height: 1; color: var(--orange);
-    }
-    .ach-item span { display: block; margin-top: 0.6rem; color: rgba(247,243,234,0.75); font-size: 0.95rem; }
-    .ach-credential {
-      margin-top: 2.75rem; padding-top: 2rem; border-top: 1px solid rgba(247,243,234,0.18);
-      color: rgba(247,243,234,0.9); font-size: 1rem;
-    }
-
-    /* ══════════════════ TEACHING APPROACH ══════════════════ */
-    .approach-header { max-width: 40rem; margin-bottom: 3rem; }
-    .approach-list { list-style: none; margin: 0; padding: 0; }
-    .approach-list li {
-      display: grid; grid-template-columns: 4.5rem 1fr; gap: 1.5rem;
-      padding: 2rem 0; border-top: 1px solid var(--border);
-    }
-    .approach-list li:last-child { border-bottom: 1px solid var(--border); }
-    .approach-num { font-family: var(--font-mono); color: var(--orange-deep); font-size: 1.1rem; padding-top: 0.2rem; }
-    .approach-list h3 { font-size: 1.35rem; margin-bottom: 0.5rem; }
-    .approach-list p { color: var(--muted); margin: 0; max-width: 34rem; }
-
-    /* ══════════════════ SUBJECTS ══════════════════ */
-    .subject-block {
-      display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem);
+    .nav-links a:hover { color: var(--accent); }
+    .nav-wa-btn {
+      box-shadow: 0 4px 0 #15a349;
+      display: inline-flex;
       align-items: center;
-      padding: clamp(2.5rem, 5vw, 4rem) 0;
+      gap: .4rem;
+      background: #25d366;
+      color: #fff !important;
+      text-decoration: none;
+      font-size: .82rem;
+      font-weight: 600;
+      padding: .4rem .95rem;
+      border-radius: 20px;
+      white-space: nowrap;
+      transition: background .2s, transform .15s;
+      flex-shrink: 0;
     }
-    .subject-block + .subject-block { border-top: 1px solid var(--border); }
-    .subject-block.reverse .subject-visual { order: 2; }
-    .subject-visual {
-      background: var(--beige); border-radius: var(--radius-lg);
-      padding: clamp(1.5rem, 4vw, 2.5rem);
+    .nav-wa-btn:hover { background: #1ebe5a; transform: scale(1.04); box-shadow: 0 3px 0 #15a349; }
+
+    .portal-btn {
+      display: block;
+      width: 100%;
+      margin-top: 1.25rem;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    /* Deliberately breaks from the navy .btn-primary look used everywhere
+       else on the page - violet + a slight tilt, so this one CTA (the
+       actual product, not just a marketing link) doesn't blend into the
+       row of navy buttons around it. Violet instead of yellow: the key
+       emoji itself renders yellow/gold, so a yellow button swallowed it -
+       violet (already used for the physics tag elsewhere on the page)
+       makes the emoji pop instead of disappearing into the background. */
+    .btn.portal-btn {
+      background: var(--tag-physics);
+      color: #fff !important;
+      border: 2px solid #3b0f8a;
+      border-radius: 999px;
+      box-shadow: 0 4px 0 #3b0f8a;
+      transform: rotate(-1.5deg);
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: .55rem 1.25rem;
+      white-space: nowrap;
+    }
+    .btn.portal-btn:hover {
+      background: var(--tag-physics);
+      transform: rotate(0deg) translateY(-2px);
+      box-shadow: 0 6px 0 #3b0f8a;
+    }
+    .btn.portal-btn:active {
+      transform: rotate(0deg) translateY(2px);
+      box-shadow: 0 1px 0 #3b0f8a;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem 3.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .hero-text h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      margin-bottom: 1rem;
+    }
+    .hero-text h1 span { color: var(--accent); }
+    .hero-text p {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 420px;
+      margin-bottom: 2rem;
+    }
+    .hero-btns { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: .65rem 1.5rem;
+      border-radius: 10px;
+      font-size: .9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform .1s ease, box-shadow .1s ease;
+      letter-spacing: 0.2px;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 5px 0 var(--navy-dark), 0 6px 14px rgba(30,58,127,0.22);
+      transform: translateY(-2px);
+    }
+    .btn-primary:hover {
+      background: #162f6a;
+      transform: translateY(0px);
+      box-shadow: 0 2px 0 var(--navy-dark), 0 3px 8px rgba(30,58,127,0.18);
+    }
+    .btn-outline {
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      background: transparent;
+      box-shadow: 0 4px 0 rgba(30,58,127,0.2);
+      transform: translateY(-2px);
+    }
+    .btn-outline:hover {
+      background: var(--accent-light);
+      transform: translateY(0px);
+      box-shadow: 0 1px 0 rgba(30,58,127,0.15);
+    }
+
+    .hero-card {
+      background: #ffffff;
+      border: 2px solid var(--border);
+      border-top: 4px solid var(--yellow);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 6px 10px 30px rgba(30,58,127,0.12), 0 2px 6px rgba(0,0,0,0.05);
+      text-align: center;
+      animation: float 5s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    .hero-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 1rem;
+      color: var(--accent);
+    }
+    .hero-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: .25rem; }
+    .hero-card .subtitle { color: var(--muted); font-size: .85rem; margin-bottom: 1.25rem; }
+    .stat-row { display: flex; justify-content: center; gap: 1.5rem; }
+    .stat { text-align: center; }
+    .stat-num { font-size: 1.5rem; font-weight: 800; color: var(--accent); }
+    .stat-label { font-size: .75rem; color: var(--muted); }
+
+    /* ─── SCROLL INDICATOR ─── */
+    .scroll-indicator {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 0.82rem;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 8px 18px 10px;
+      box-shadow: 0 4px 16px rgba(30,58,127,0.13);
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+      white-space: nowrap;
+      animation: fadeInUp 1s ease 0.8s both;
+    }
+    .scroll-indicator.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .scroll-arrow {
+      width: 28px;
+      height: 28px;
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--accent);
+      animation: bounce 1.8s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    /* ─── SECTION ─── */
+    section { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem; }
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: .8rem;
+      color: var(--text);
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 56px;
+      height: 4px;
+      background: var(--yellow);
+      border-radius: 2px;
+      margin: 6px auto 0;
+    }
+    .section-sub {
+      color: var(--muted);
+      font-size: .9rem;
+      margin-bottom: 2rem;
+    }
+    hr.divider {
+      border: none;
+      max-width: 1100px;
+      margin: 0 auto;
+      height: 20px;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        repeating-linear-gradient(90deg, var(--border) 0, var(--border) 1px, transparent 1px, transparent 12px),
+        repeating-linear-gradient(90deg, var(--border) 0, var(--border) 1px, transparent 1px, transparent 60px);
+      background-size: 100% 8px, 12px 8px, 60px 14px;
+      background-position: center center, center center, center center;
+      background-repeat: no-repeat, repeat-x, repeat-x;
+      opacity: 0.5;
+    }
+
+    /* ─── TABS ─── */
+    .tabs {
+      display: flex;
+      gap: .5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .tab {
+      padding: .45rem 1.1rem;
+      border-radius: 999px;
+      border: 1.5px solid var(--border);
+      background: transparent;
+      font-size: .85rem;
+      cursor: pointer;
+      color: var(--muted);
+      transition: all .2s;
+    }
+    .tab.active, .tab:hover {
+      background: var(--yellow);
+      color: var(--text);
+      border-color: #e8b800;
+      box-shadow: 0 3px 0 #c9a400;
+      font-weight: 600;
+    }
+
+    /* ─── SUBJECT CARDS ─── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      background: #fffef5;
+      border: 1px solid #e3dfc8;
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      box-shadow: 3px 5px 18px rgba(30,58,127,0.08), 0 1px 3px rgba(0,0,0,0.04);
+      transition: box-shadow .25s, transform .25s;
+      transform-origin: center center;
+    }
+    .card:nth-child(3n+1) { transform: rotate(-0.7deg); }
+    .card:nth-child(3n+2) { transform: rotate(0.5deg); }
+    .card:nth-child(3n+3) { transform: rotate(-0.4deg); }
+    .card:hover {
+      box-shadow: 4px 10px 28px rgba(30,58,127,0.14);
+      transform: rotate(0deg) translateY(-4px) !important;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: .85rem;
+    }
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .icon-math { background: #dbeaf5; color: var(--tag-math); }
+    .icon-phys { background: #ece6f7; color: var(--tag-physics); }
+    .icon-cs   { background: #daf0e7; color: var(--tag-cs); }
+    .icon-gen  { background: #fef3e2; color: #8a5c00; }
+
+    .card-title { font-size: .95rem; font-weight: 600; }
+    .card-sub   { font-size: .8rem; color: var(--muted); }
+
+    .topics { list-style: none; display: flex; flex-direction: column; gap: .35rem; }
+    .topics li {
+      font-size: .82rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .topics li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+
+    .card-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-top: 1rem;
+    }
+    .badge {
+      font-size: .72rem;
+      padding: .22rem .65rem;
+      border-radius: 999px;
+      font-weight: 600;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .badge-math  { background: #dbeaf5; color: var(--tag-math); }
+    .badge-phys  { background: #ece6f7; color: var(--tag-physics); }
+    .badge-cs    { background: #daf0e7; color: var(--tag-cs); }
+    .badge-units { background: #fef3e2; color: #6b4500; }
+
+    /* ─── ABOUT ─── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    .about-sidebar {
+      background: #fffef5;
+      border: 1px solid #e3dfc8;
+      border-top: 4px solid var(--yellow);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      text-align: center;
+      box-shadow: 3px 5px 16px rgba(30,58,127,0.08);
+    }
+    .about-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      margin: 0 auto 1rem;
+      color: var(--accent);
+    }
+    .about-name { font-size: 1.1rem; font-weight: 600; margin-bottom: .2rem; }
+    .about-role { font-size: .82rem; color: var(--muted); margin-bottom: 1.2rem; }
+    .contact-list { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+    .contact-list li { font-size: .84rem; color: var(--muted); }
+    .contact-list a { color: var(--accent); text-decoration: none; }
+    .about-body h3 { font-size: 1rem; font-weight: 600; margin-bottom: .6rem; }
+    .about-body p { color: var(--muted); font-size: .9rem; margin-bottom: 1.2rem; }
+    .about-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .5rem; }
+    .about-tag {
+      background: var(--yellow);
+      color: var(--text);
+      font-size: .78rem;
+      font-weight: 600;
+      padding: .25rem .75rem;
+      border-radius: 999px;
+      box-shadow: 0 2px 0 #c9a400;
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials-wrapper {
+      position: relative;
+      overflow: hidden;
+    }
+    .testimonials-track {
+      display: flex;
+      gap: 1.2rem;
+      transition: transform .45s cubic-bezier(.4,0,.2,1);
+    }
+    .testimonial-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.6rem 1.8rem;
+      min-width: calc(33.333% - .8rem);
+      flex-shrink: 0;
+      box-shadow: 0 1px 4px rgba(0,0,0,.06);
+      display: flex;
+      flex-direction: column;
+      gap: .9rem;
+    }
+    .testimonial-quote {
+      font-size: .93rem;
+      color: var(--text);
+      line-height: 1.65;
+      flex: 1;
+      position: relative;
+      padding-right: 1.4rem;
+    }
+    .testimonial-quote::before {
+      content: '"';
+      position: absolute;
+      right: 0;
+      top: -.15rem;
+      font-size: 2.2rem;
+      color: var(--accent);
+      line-height: 1;
+      font-family: Georgia, serif;
+    }
+    .testimonial-footer {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding-top: .8rem;
+      border-top: 1px solid var(--border);
+    }
+    .testimonial-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .testimonial-name { font-size: .85rem; font-weight: 600; }
+    .testimonial-detail { font-size: .76rem; color: var(--muted); }
+    .testimonial-stars { margin-right: auto; color: #f4b942; font-size: .85rem; letter-spacing: 1px; }
+    .carousel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .carousel-btn {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 1rem;
+      cursor: pointer;
       display: flex; align-items: center; justify-content: center;
+      transition: all .2s;
     }
-    .subject-visual svg { width: 100%; height: auto; max-width: 320px; }
-    .subject-eyebrow { font-family: var(--font-mono); font-size: 0.8rem; color: var(--orange-deep); letter-spacing: 0.06em; text-transform: uppercase; }
-    .subject-block h3 { font-size: 1.9rem; margin: 0.5rem 0 1rem; }
-    .subject-levels { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 1.25rem; }
-    .subject-level { display: flex; gap: 0.9rem; align-items: baseline; }
-    .subject-level b { font-family: var(--font-mono); font-size: 0.85rem; color: var(--navy); flex-shrink: 0; min-width: 5.5rem; }
-    .subject-level span { color: var(--muted); font-size: 0.94rem; }
-
-    @media (max-width: 860px) {
-      .subject-block, .subject-block.reverse { grid-template-columns: 1fr; }
-      .subject-block.reverse .subject-visual { order: -1; }
+    .carousel-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+    .carousel-dots { display: flex; gap: .4rem; }
+    .carousel-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: background .2s, transform .2s;
+      border: none;
     }
-
-    /* ══════════════════ DIGITAL EXPERIENCE ══════════════════ */
-    .digital { background: var(--beige); }
-    .digital-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
-    .digital-list { list-style: none; margin: 1.75rem 0 2rem; padding: 0; display: flex; flex-direction: column; gap: 0.9rem; }
-    .digital-list li { display: flex; gap: 0.75rem; color: var(--ink); font-size: 1.02rem; }
-    .digital-list li::before { content: '—'; color: var(--orange-deep); flex-shrink: 0; }
-    .terminal {
-      background: var(--navy-deep); color: #cfe3d9; border-radius: var(--radius-lg);
-      padding: 1.5rem 1.6rem; font-family: var(--font-mono); font-size: 0.86rem; line-height: 1.9;
-      direction: ltr; text-align: left;
-      box-shadow: 0 20px 48px rgba(14,39,64,0.28);
+    .carousel-dot.active { background: var(--accent); transform: scale(1.3); }
+    @media (max-width: 720px) {
+      .testimonial-card { min-width: 100%; }
     }
-    .terminal .muted2 { color: #6f8f89; }
-    .terminal .accent2 { color: var(--orange); }
-    @media (max-width: 860px) { .digital-grid { grid-template-columns: 1fr; } }
-
-    /* ══════════════════ TESTIMONIALS ══════════════════ */
-    .testimonial-wrap { display: flex; align-items: center; gap: 1.25rem; max-width: 480px; margin: 2.5rem auto 0; }
-    .t-track-wrap { flex: 1; overflow: hidden; border-radius: var(--radius-lg); }
-    .t-track { display: flex; transition: transform .4s cubic-bezier(.4,0,.2,1); }
-    .t-slide { min-width: 100%; }
-    .t-slide img { width: 100%; max-height: 560px; object-fit: cover; object-position: top; background: var(--beige); }
-    .t-btn {
-      width: 42px; height: 42px; border-radius: 50%; border: 1.5px solid var(--border);
-      background: var(--cream); color: var(--ink); font-size: 1.1rem; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-      transition: border-color .15s, color .15s;
-    }
-    .t-btn:hover { border-color: var(--navy); color: var(--navy); }
-    .t-dots { display: flex; justify-content: center; gap: 0.4rem; margin-top: 1rem; }
-    .t-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border); cursor: pointer; border: none; transition: background .15s; }
-    .t-dot.active { background: var(--navy); }
-    @media (max-width: 600px) {
-      .testimonial-wrap { gap: 0.4rem; }
-      .t-btn { position: static; }
+    @media (min-width: 721px) and (max-width: 1000px) {
+      .testimonial-card { min-width: calc(50% - .6rem); }
     }
 
-    /* ══════════════════ ABOUT ══════════════════ */
-    .about-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
-    .about-photo { border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4/5; }
-    .about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
-    .about-body h3 { font-size: 1.15rem; margin: 1.6rem 0 0.6rem; }
-    .about-body h3:first-child { margin-top: 0; }
-    .about-body p { color: var(--muted); margin: 0; }
-    .about-credentials { list-style: none; margin: 1.6rem 0 0; padding: 1.4rem 0 0; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 0.6rem; }
-    .about-credentials li { font-size: 0.95rem; color: var(--ink); }
-    .about-credentials a { color: var(--navy); text-decoration: underline; text-underline-offset: 3px; }
-    @media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; } }
+    /* ─── GALLERY ─── */
+    .gallery-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      max-width: 420px;
+      margin: 0 auto 1.2rem;
+      position: relative;
+    }
+    .gallery-track-wrap {
+      flex: 1;
+      overflow: hidden;
+      border-radius: 14px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .gallery-track {
+      display: flex;
+      transition: transform .4s cubic-bezier(.4,0,.2,1);
+    }
+    .gallery-slide {
+      min-width: 100%;
+    }
+    .gallery-slide img {
+      width: 100%;
+      display: block;
+      border-radius: 14px;
+      max-height: 600px;
+      object-fit: cover; object-position: top;
+      background: #f0ede8;
+    }
+    .gallery-btn {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background .2s;
+      line-height: 1;
+    }
+    .gallery-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .gallery-dots {
+      display: flex;
+      justify-content: center;
+      gap: .5rem;
+      margin-top: .2rem;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .dot.active { background: var(--accent); }
 
-    /* ══════════════════ PRICING ══════════════════ */
-    .pricing-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(2rem, 5vw, 3.5rem); align-items: start; }
-    .price-primary b { font-family: var(--font-display); font-size: clamp(3rem, 7vw, 4.2rem); color: var(--navy); }
-    .price-primary .unit-label { color: var(--muted); font-size: 1rem; margin-inline-start: 0.4rem; }
-    .price-secondary {
-      border-inline-start: 2px solid var(--border);
-      padding-inline-start: clamp(1.25rem, 3vw, 2rem);
+    /* ─── PREVIEW ─── */
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
     }
-    .price-secondary b { font-family: var(--font-display); font-size: 2.2rem; color: var(--ink); }
-    .included-list { list-style: none; margin: 1.5rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; }
-    .included-list li { color: var(--muted); font-size: 0.95rem; }
-    .included-list li::before { content: '✓ '; color: var(--orange-deep); font-weight: 700; }
-    @media (max-width: 760px) {
-      .pricing-grid { grid-template-columns: 1fr; }
-      .price-secondary { border-inline-start: none; border-top: 1px solid var(--border); padding-inline-start: 0; padding-top: 1.5rem; }
+    @media (max-width: 800px) {
+      .preview-grid { grid-template-columns: 1fr; }
     }
+    .preview-col {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.3rem;
+      box-shadow: var(--shadow);
+    }
+    .preview-col-header {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: 1.1rem;
+      padding-bottom: .9rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .preview-col-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .preview-col-title { font-size: .95rem; font-weight: 600; }
+    .preview-col-sub   { font-size: .75rem; color: var(--muted); }
+    .preview-slots     { display: flex; flex-direction: column; gap: .7rem; }
+    .preview-slot {
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: .4rem;
+    }
+    .preview-slot:hover .lbx-hint { opacity: 1 !important; }
+    .preview-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+    }
+    .preview-slot.empty {
+      border: 2px dashed var(--border);
+      background: var(--bg);
+      cursor: default;
+    }
+    .preview-slot-icon { font-size: 1.4rem; color: var(--border); }
+    .preview-slot-text { font-size: .75rem; color: var(--muted); }
 
-    /* ══════════════════ MATERIALS PREVIEW ══════════════════ */
-    .materials-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
-    .material-item {
-      position: relative; border-radius: var(--radius-md); overflow: hidden; aspect-ratio: 4/3;
-      cursor: pointer; background: var(--beige);
+    /* ─── QUOTE CARDS ─── */
+    .quotes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
     }
-    .material-item img { width: 100%; height: 100%; object-fit: cover; }
-    .material-caption {
-      position: absolute; inset-inline: 0; bottom: 0;
-      background: linear-gradient(to top, rgba(14,39,64,0.82), transparent);
-      color: var(--cream); font-size: 0.76rem; padding: 1.5rem 0.7rem 0.55rem;
+    .quote-card {
+      background: #fffef0;
+      border: none;
+      border-radius: var(--radius);
+      border-top: 4px solid var(--yellow);
+      padding: 1.4rem;
+      box-shadow: 3px 6px 16px rgba(0,0,0,0.09);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
     }
-    @media (max-width: 760px) { .materials-grid { grid-template-columns: repeat(2, 1fr); } }
+    .quote-card::before {
+      content: '״';
+      font-size: 3rem;
+      color: var(--accent-light);
+      position: absolute;
+      top: .2rem;
+      right: 1rem;
+      line-height: 1;
+      font-family: Georgia, serif;
+    }
+    .quote-text {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      padding-top: .8rem;
+    }
+    .quote-meta {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
+    .quote-grade {
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .quote-subject {
+      font-size: .72rem;
+      padding: .2rem .65rem;
+      border-radius: 999px;
+      font-weight: 500;
+    }
+    .badge-math-q { background: #dbeaf5; color: var(--tag-math); }
+    .badge-phys-q { background: #ece6f7; color: var(--tag-physics); }
+    .badge-cs-q   { background: #daf0e7; color: var(--tag-cs); }
 
-    /* ══════════════════ FINAL CTA ══════════════════ */
-    .final-cta { text-align: center; }
-    .final-cta h2 { font-size: clamp(2rem, 4.5vw, 2.8rem); }
-    .final-cta p { color: var(--muted); margin: 1rem auto 2rem; max-width: 30rem; }
-
-    /* ══════════════════ LEAD FORM ══════════════════ */
-    .lead-card { max-width: 620px; margin: 2.5rem auto 0; }
-    .lead-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
-    .lead-field { display: flex; flex-direction: column; gap: 0.4rem; }
-    .lead-field.full { grid-column: 1 / -1; }
-    .lead-field label { font-size: 0.86rem; font-weight: 600; color: var(--ink); }
-    .lead-field input, .lead-field select, .lead-field textarea {
-      font-family: inherit; font-size: 0.98rem; padding: 0.75rem 0;
-      border: none; border-bottom: 1.5px solid var(--border);
-      background: transparent; color: var(--ink); border-radius: 0;
-    }
-    .lead-field input:focus, .lead-field select:focus, .lead-field textarea:focus {
-      outline: none; border-bottom-color: var(--navy);
-    }
-    .lead-field textarea { resize: vertical; min-height: 4rem; }
-    .lead-hp { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
-    .lead-submit-row { margin-top: 1.75rem; }
-    .lead-msg { margin-top: 1rem; font-size: 0.92rem; }
-    .lead-msg.success { color: #2f6b45; }
-    .lead-msg.error { color: #a13d2f; }
-
-    /* ══════════════════ FOOTER ══════════════════ */
+    /* ─── FOOTER ─── */
     footer {
-      background: var(--navy-deep); color: rgba(247,243,234,0.7);
-      padding: 2.25rem var(--gutter); text-align: center; font-size: 0.88rem;
+      border-top: 2px solid var(--border);
+      background: #1a2744;
+      color: rgba(255,255,255,0.75) !important;
+      padding: 1.8rem 2rem;
+      text-align: center;
+      color: rgba(255,255,255,0.65);
+      font-size: .82rem;
     }
-    footer a { color: var(--orange); text-decoration: none; }
+
+    /* ─── NAV TOGGLE ─── */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text);
+      padding: .3rem .6rem;
+      border-radius: 6px;
+      line-height: 1;
+    }
+    .nav-toggle:hover { background: var(--accent-light); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 720px) {
+      /* NAV */
+      .nav-toggle { display: flex; align-items: center; }
+      nav { padding: 0 1rem; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 58px;
+        left: 0;
+        right: 0;
+        background: rgba(255,255,255,0.96);
+        border-bottom: 2px solid var(--border);
+        flex-direction: column;
+        gap: 0;
+        z-index: 99;
+        box-shadow: 0 4px 12px rgba(0,0,0,.1);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { border-bottom: 1px solid var(--border); }
+      .nav-links a { display: block; padding: .75rem 1.5rem; font-size: .95rem; }
+
+      /* HERO */
+      .hero { grid-template-columns: 1fr; padding-top: 2rem; }
+      .hero-card {
+        order: -1;
+        display: block;
+        max-width: 280px;
+        margin: 0 auto;
+        padding: 1.5rem 1.2rem 1.2rem;
+      }
+      .stat-row { gap: 1rem; }
+      .stat-num { font-size: 1.1rem; }
+
+      /* GALLERY */
+      .gallery-wrapper { max-width: 100%; gap: 0; }
+      .gallery-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        background: rgba(255,255,255,0.85);
+      }
+      .gallery-prev { right: 8px; }
+      .gallery-next { left: 8px; }
+
+      /* ABOUT */
+      .about-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─── PANEL ANIMATION ─── */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ─── FAQ ─── */
+    .faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: .8rem; }
+    .faq-item {
+      background: #fffef5;
+      border: 1px solid #e3dfc8;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: box-shadow .2s;
+    }
+    .faq-item:hover { box-shadow: 0 4px 18px rgba(30,58,127,0.11); }
+    .faq-q {
+      width: 100%; text-align: right; background: none; border: none;
+      padding: 1.1rem 1.3rem;
+      font-family: inherit; font-size: 1rem; font-weight: 600;
+      color: var(--text); cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center; gap: .8rem;
+    }
+    .faq-q .faq-icon {
+      flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%;
+      background: var(--accent-light); color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; font-weight: 700; transition: transform .3s, background .3s;
+    }
+    .faq-item.open .faq-q .faq-icon {
+      transform: rotate(45deg);
+      background: var(--yellow); color: var(--navy-dark);
+    }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .35s ease, padding .3s;
+      padding: 0 1.3rem;
+      color: var(--muted); font-size: .92rem; line-height: 1.7;
+    }
+    /* Must clear the tallest answer at the narrowest width - the cancellation
+       policy answer alone measures ~225px on a 375px screen, so the old
+       200px clamp silently cut off its last line. */
+    .faq-item.open .faq-a { max-height: 420px; padding: 0 1.3rem 1.1rem; }
+    .faq-divider {
+      border: none;
+      border-top: 2px dashed rgba(30,58,127,0.12);
+      margin: 0 1.3rem;
+    }
+    .faq-item.open .faq-divider { display: none; }
+
+    /* ─── LEAD FORM ─── */
+    .lead-card {
+      max-width: 560px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-top: 4px solid var(--accent);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 6px 10px 30px rgba(30,58,127,0.1), 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .lead-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; margin-top: 1.2rem; }
+    .lead-field { display: flex; flex-direction: column; gap: .35rem; }
+    .lead-field.full { grid-column: 1 / -1; }
+    .lead-field label { font-size: .82rem; font-weight: 600; color: var(--text); }
+    .lead-field input,
+    .lead-field select,
+    .lead-field textarea {
+      font-family: inherit;
+      font-size: .92rem;
+      padding: .6rem .75rem;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .lead-field input:focus,
+    .lead-field select:focus,
+    .lead-field textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .lead-field textarea { resize: vertical; min-height: 4.5rem; }
+    /* Honeypot - present in the DOM (so a bot filling every field finds
+       it) but never visible or reachable by a real visitor tabbing
+       through the form. display:none is deliberately NOT used here -
+       some bots specifically skip hidden fields, this doesn't. */
+    .lead-hp {
+      position: absolute;
+      width: 1px; height: 1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+    }
+    .lead-submit-row { margin-top: 1.3rem; display: flex; justify-content: center; }
+    .lead-msg { margin-top: 1rem; text-align: center; font-size: .9rem; }
+    .lead-msg.success { color: #1a7a4a; }
+    .lead-msg.error { color: #b3261e; }
   </style>
 </head>
 <body>
 
 <!-- NAV -->
-<header class="site-nav">
-  <div class="nav-row">
-    <a class="nav-logo" href="#">אלירן גלברג</a>
-    <nav class="nav-links">
-      <li><a href="#subjects">מתמטיקה</a></li>
-      <li><a href="#subjects">פיזיקה</a></li>
-      <li><a href="#subjects">מחשבים</a></li>
-      <li><a href="#digital">איך זה עובד</a></li>
-      <li><a href="#testimonials">המלצות</a></li>
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">אלירן גלברג · מורה פרטי</a>
+    <a href="https://wa.me/972586053334" target="_blank" class="nav-wa-btn">📲 וואטסאפ</a>
+    <button class="nav-toggle" id="navToggle" aria-label="תפריט">☰</button>
+    <ul class="nav-links">
+      <li><a href="#testimonials">חוות דעת</a></li>
+      <li><a href="#subjects">מקצועות</a></li>
+      <li><a href="#preview">חומרי לימוד</a></li>
+      <li><a href="#pricing">מחירים</a></li>
       <li><a href="#about">אודות</a></li>
-    </nav>
-    <a href="#contact-form" class="btn btn-primary nav-cta">קובעים שיעור</a>
-    <button class="nav-toggle" id="navToggle" aria-label="תפריט" aria-expanded="false">☰</button>
+      <li><a href="#contact">צור קשר</a></li>
+      <li><a href="#faq">שאלות ותשובות</a></li>
+      <li><a href="#contact-form">השאירו פרטים</a></li>
+    </ul>
   </div>
-  <nav class="nav-drawer" id="navDrawer">
-    <a href="#subjects">מתמטיקה</a>
-    <a href="#subjects">פיזיקה</a>
-    <a href="#subjects">מחשבים</a>
-    <a href="#digital">איך זה עובד</a>
-    <a href="#testimonials">המלצות</a>
-    <a href="#about">אודות</a>
-    <a href="#contact-form" class="btn btn-primary">קובעים שיעור</a>
-  </nav>
-</header>
+</nav>
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-copy reveal">
-    <h1>להבין.<br/>לא רק <em>לזכור</em>.</h1>
-    <p>שיעורים פרטיים במתמטיקה, פיזיקה ומדעי המחשב לכיתות ז׳–י״ב. לא עוד תרגיל שנפתר בעל-פה בלי להבין למה — אלא שיטה שמסבירה את הדרך, לא רק את התשובה.</p>
-    <div class="hero-ctas">
-      <a href="#contact-form" class="btn btn-primary">קובעים שיעור</a>
-      <a href="#digital" class="btn btn-outline">איך זה עובד?</a>
+  <div class="hero-text">
+    <h1>הצלחה במתמטיקה,<br/>פיזיקה <span>&</span> מחשבים</h1>
+    <p>שיעורים פרטיים מותאמים אישית לכיתות ז׳–י״ב. שיטה ייחודית, סיכומי שיעור, זמינות לאורך כל היום, כלים מקצועיים, תוצאות אמיתיות — פרונטלי או זום.</p>
+    <div class="hero-btns">
+      <a href="https://wa.me/972586053334" target="_blank" class="btn btn-primary">📲 שלח וואטסאפ</a>
+      <a href="#subjects" class="btn btn-outline">גלה את המקצועות</a>
     </div>
   </div>
-  <div class="hero-photo-wrap reveal">
-    <img loading="lazy" src="images/img_17.jpg" alt="אלירן גלברג" />
-    <div class="hero-tag">מורה פרטי · רמת פולג, נתניה</div>
-  </div>
-  <div class="hero-unit-strip reveal">
-    <div class="unit"><b>3</b><span>תחומי לימוד</span></div>
-    <div class="unit"><b>5</b><span>יח״ל מתמטיקה</span></div>
-    <div class="unit"><b>5</b><span>יח״ל פיזיקה</span></div>
-    <div class="unit"><b>10</b><span>יח״ל מדעי המחשב</span></div>
+  <div class="hero-card">
+    <img loading="lazy" src="images/img_1.jpg" alt="אלירן גלברג" style="width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:top center;border:2px solid var(--accent);display:block;margin:0 auto 1rem;"/>
+    <h3>אלירן גלברג</h3>
+    <div class="subtitle">מורה פרטי · רמת פולג, נתניה</div>
+    <div class="stat-row">
+      <div class="stat"><div class="stat-num">5</div><div class="stat-label">יח׳ מתמטיקה</div></div>
+      <div class="stat"><div class="stat-num">10</div><div class="stat-label">יח׳ מחשבים</div></div>
+      <div class="stat"><div class="stat-num">5</div><div class="stat-label">יח׳ פיזיקה</div></div>
+    </div>
+    <a href="https://app.elirangelberg.com" class="btn portal-btn">🔑 מעבר לאיזור האישי</a>
   </div>
 </div>
 
-<!-- ACHIEVEMENTS -->
-<section class="achievements">
-  <div class="container reveal">
-    <p class="eyebrow" style="color:var(--orange);">רקע לימודי</p>
-    <div class="ach-grid">
-      <div class="ach-item"><b>3</b><span>תחומי לימוד — מתמטיקה, פיזיקה, מדעי המחשב</span></div>
-      <div class="ach-item"><b>5</b><span>יחידות לימוד במתמטיקה</span></div>
-      <div class="ach-item"><b>5</b><span>יחידות לימוד בפיזיקה</span></div>
-      <div class="ach-item"><b>10</b><span>יחידות לימוד במדעי המחשב</span></div>
-    </div>
-    <p class="ach-credential">🏅 בוגר בהצטיינות יתרה, עם תעודת הצטיינות ממשרד החינוך.</p>
+<!-- SCROLL DOWN INDICATOR -->
+<div class="scroll-indicator">
+  <span>גלול למטה לעוד מידע</span>
+  <div class="scroll-arrow">&#8595;</div>
+</div>
+
+<!-- OFFICE SECTION -->
+<div style="max-width:900px;margin:0 auto;padding:2.5rem 2rem 1rem;text-align:center;">
+  <div style="font-size:1.4rem;font-weight:700;color:var(--accent);margin-bottom:1rem;letter-spacing:-0.3px;">
+    🏠 סביבת הלמידה שלנו
   </div>
-</section>
+  <img loading="lazy" src="images/office_new.jpg" alt="חדר הלימוד של אלירן" style="width:100%;max-width:820px;border-radius:16px;box-shadow:0 4px 24px rgba(30,58,127,0.12);border:2px solid var(--border);display:block;margin:0 auto;object-fit:cover;max-height:480px;"/>
+</div>
 
-<!-- TEACHING APPROACH -->
-<section id="digital-anchor">
-  <div class="container">
-    <div class="approach-header reveal">
-      <p class="eyebrow">הגישה שלי</p>
-      <h2>ארבעה דברים שאני עושה אחרת</h2>
-    </div>
-    <ol class="approach-list">
-      <li class="reveal">
-        <span class="approach-num">01</span>
-        <div>
-          <h3>להבין, לא לשנן</h3>
-          <p>המטרה היא לא שתדע לפתור את התרגיל. המטרה היא שתבין למה פתרת אותו ככה — כדי שתדע לפתור גם את התרגיל שלא ראית.</p>
-        </div>
-      </li>
-      <li class="reveal">
-        <span class="approach-num">02</span>
-        <div>
-          <h3>קצב אישי, לא קצב כיתה</h3>
-          <p>כל שיעור מותאם לקצב ולרמה שלך באמת — לא לממוצע של כיתה עם עשרים תלמידים אחרים.</p>
-        </div>
-      </li>
-      <li class="reveal">
-        <span class="approach-num">03</span>
-        <div>
-          <h3>סיכום אחרי כל שיעור, לא רק לפני מבחן</h3>
-          <p>בסוף כל מפגש מקבלים סיכום מסודר ושיעורי בית — כדי שהחומר יישאר מסודר, לא ערימה של דפים מפוזרים.</p>
-        </div>
-      </li>
-      <li class="reveal">
-        <span class="approach-num">04</span>
-        <div>
-          <h3>זמינות גם אחרי השעה</h3>
-          <p>שאלה שעולה ביום שלישי בערב לא צריכה לחכות לשיעור הבא.</p>
-        </div>
-      </li>
-    </ol>
-  </div>
-</section>
-
-<hr class="rule"/>
-
-<!-- SUBJECTS -->
-<section id="subjects">
-  <div class="container">
-    <div class="approach-header reveal">
-      <p class="eyebrow">מקצועות ורמות</p>
-      <h2>מז׳ ועד בגרות — בשלושה תחומים</h2>
-    </div>
-
-    <div class="subject-block reveal">
-      <div>
-        <p class="subject-eyebrow">מתמטיקה</p>
-        <h3>מחשבון וגיאומטריה ועד אינטגרלים</h3>
-        <div class="subject-levels">
-          <div class="subject-level"><b>ז׳–ט׳</b><span>חשבון, אלגברה בסיסית, גיאומטריה, חזקות ושורשים</span></div>
-          <div class="subject-level"><b>3 יח״ל</b><span>פונקציות, סדרות, גיאומטריה אנליטית בסיסית</span></div>
-          <div class="subject-level"><b>4 יח״ל</b><span>חשבון דיפרנציאלי ואינטגרלי, טריגונומטריה מורחבת</span></div>
-          <div class="subject-level"><b>5 יח״ל</b><span>אינטגרל מסוים, וקטורים, מספרים מרוכבים, בעיות תנועה</span></div>
-        </div>
-      </div>
-      <div class="subject-visual">
-        <svg viewBox="0 0 260 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 160 H240" stroke="#DDD7CC" stroke-width="1.5"/>
-          <path d="M30 20 V160" stroke="#DDD7CC" stroke-width="1.5"/>
-          <path d="M30 150 C 80 150, 90 40, 140 40 S 210 150, 235 60" stroke="#173B5F" stroke-width="3" fill="none"/>
-          <circle cx="140" cy="40" r="4.5" fill="#E89B45"/>
-          <circle cx="90" cy="115" r="4.5" fill="#E89B45"/>
-        </svg>
-      </div>
-    </div>
-
-    <div class="subject-block reverse reveal">
-      <div>
-        <p class="subject-eyebrow">פיזיקה</p>
-        <h3>מכניקה, חשמל ואור</h3>
-        <div class="subject-levels">
-          <div class="subject-level"><b>ז׳–ט׳</b><span>כוחות ותנועה, אנרגיה, חשמל בסיסי, גלים ואור</span></div>
-          <div class="subject-level"><b>5 יח״ל</b><span>קינמטיקה, דינמיקה, שימור אנרגיה ותנע, חשמל ומגנטיות, אופטיקה</span></div>
-        </div>
-      </div>
-      <div class="subject-visual">
-        <svg viewBox="0 0 260 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 160 H240" stroke="#DDD7CC" stroke-width="1.5"/>
-          <path d="M25 158 Q 130 20, 232 158" stroke="#173B5F" stroke-width="3" stroke-dasharray="1 9" stroke-linecap="round" fill="none"/>
-          <path d="M120 55 L 150 40 L 138 68" stroke="#E89B45" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="25" cy="158" r="5" fill="#173B5F"/>
-          <circle cx="232" cy="158" r="5" fill="#173B5F"/>
-        </svg>
-      </div>
-    </div>
-
-    <div class="subject-block reveal">
-      <div>
-        <p class="subject-eyebrow">מדעי המחשב</p>
-        <h3>מ-Scratch ועד אלגוריתמים</h3>
-        <div class="subject-levels">
-          <div class="subject-level"><b>ז׳–ט׳</b><span>מבוא לתכנות (Scratch / Python), לוגיקה, מבני נתונים בסיסיים</span></div>
-          <div class="subject-level"><b>10 יח״ל</b><span>Python מתקדם, כל מבני הנתונים, מיון וחיפוש, רקורסיה, מודלים חישוביים</span></div>
-        </div>
-      </div>
-      <div class="subject-visual">
-        <svg viewBox="0 0 260 180" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace">
-          <rect x="20" y="30" width="220" height="120" rx="8" fill="#0E2740"/>
-          <circle cx="38" cy="46" r="3.5" fill="#E89B45"/>
-          <circle cx="50" cy="46" r="3.5" fill="#cfe3d9"/>
-          <circle cx="62" cy="46" r="3.5" fill="#66717C"/>
-          <text x="34" y="75" font-size="11" fill="#cfe3d9">function understand(x) {</text>
-          <text x="46" y="93" font-size="11" fill="#E89B45">return x.explain();</text>
-          <text x="34" y="111" font-size="11" fill="#cfe3d9">}</text>
-        </svg>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="rule"/>
-
-<!-- DIGITAL EXPERIENCE -->
-<section id="digital" class="digital">
-  <div class="container">
-    <div class="digital-grid">
-      <div class="reveal">
-        <p class="eyebrow">מערכת אישית לכל תלמיד</p>
-        <h2>השיעור לא נגמר כשנגמרת השעה</h2>
-        <p class="section-lede">כל תלמיד מקבל גישה למערכת אישית שממשיכה איתו בין השיעורים — לא רק דף סיכום שנשכח בתיק.</p>
-        <ul class="digital-list">
-          <li>סיכום שיעור מסודר אחרי כל מפגש</li>
-          <li>שיעורי בית עם מעקב אחרי מה שבוצע</li>
-          <li>חומרי לימוד ותרגול לפי נושא</li>
-          <li>לוח שיעורים שמתעדכן ומסתנכרן ליומן</li>
-        </ul>
-        <a href="https://app.elirangelberg.com" class="btn btn-outline">כניסה למערכת האישית ←</a>
-      </div>
-      <div class="reveal">
-        <div class="terminal">
-          <div><span class="muted2">// אחרי כל שיעור</span></div>
-          <div>lesson.summary = <span class="accent2">"נגזרות — כלל השרשרת"</span>;</div>
-          <div>lesson.homework = [<span class="accent2">"עמ׳ 42, שאלות 3–7"</span>];</div>
-          <div>student.progress.update();</div>
-          <div><span class="muted2">// זמין תמיד, לא רק בשיעור</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<hr class="divider"/>
 
 <!-- TESTIMONIALS -->
 <section id="testimonials">
-  <div class="container">
-    <div class="approach-header reveal">
-      <p class="eyebrow">מה תלמידים כותבים</p>
-      <h2>שיחות אמיתיות, בלי עריכה</h2>
-      <p class="section-lede">צילומי מסך אמיתיים מתלמידים — כמו שהם, בלי לשפץ אף מילה.</p>
-    </div>
+  <div class="section-title">תלמידים משתפים💯</div>
+  <div class="section-sub">שיחות אמיתיות מתלמידים — בלי עריכה</div>
 
-    <div class="testimonial-wrap reveal">
-      <button class="t-btn" onclick="moveT(-1)" aria-label="הקודם">›</button>
-      <div class="t-track-wrap">
-        <div class="t-track" id="tTrack">
-          <div class="t-slide"><img loading="lazy" src="images/img_2.jpg" alt="המלצת תלמיד"/></div>
-          <div class="t-slide"><img loading="lazy" src="images/img_3.jpg" alt="המלצת תלמיד"/></div>
-          <div class="t-slide"><img loading="lazy" src="images/img_4.jpg" alt="המלצת תלמיד"/></div>
-          <div class="t-slide"><img loading="lazy" src="images/img_5.jpg" alt="המלצת תלמיד"/></div>
-          <div class="t-slide"><img loading="lazy" src="images/img_6.jpg" alt="המלצת תלמיד"/></div>
-          <div class="t-slide"><img loading="lazy" src="images/img_7.jpg" alt="המלצת תלמיד"/></div>
-          <div class="t-slide"><img loading="lazy" src="images/img_8.jpg" alt="המלצת תלמיד"/></div>
-          <div class="t-slide"><img loading="lazy" src="images/img_9.jpg" alt="המלצת תלמיד"/></div>
-          <div class="t-slide"><img loading="lazy" src="images/img_10.jpg" alt="המלצת תלמיד"/></div>
+  <div class="gallery-wrapper">
+    <button class="gallery-btn gallery-prev" onclick="moveGallery(-1)">&#8249;</button>
+
+    <div class="gallery-track-wrap">
+      <div class="gallery-track" id="galleryTrack">
+        <div class="gallery-slide active">
+          <img loading="lazy" src="images/img_2.jpg" alt="המלצת תלמיד"/>
+        </div>
+        <div class="gallery-slide">
+          <img loading="lazy" src="images/img_3.jpg" alt="המלצת תלמיד"/>
+        </div>
+        <div class="gallery-slide">
+          <img loading="lazy" src="images/img_4.jpg" alt="המלצת תלמיד"/>
+        </div>
+      <div class="gallery-slide">
+          <img loading="lazy" src="images/img_5.jpg" alt="המלצת תלמיד"/>
+
+        </div>
+        <div class="gallery-slide">
+          <img loading="lazy" src="images/img_6.jpg" alt="student testimonial">
+        </div>
+        <div class="gallery-slide">
+          <img loading="lazy" src="images/img_7.jpg" alt="student testimonial">
+        </div>
+        <div class="gallery-slide">
+          <img loading="lazy" src="images/img_8.jpg" alt="student testimonial">
+        </div>
+        <div class="gallery-slide">
+          <img loading="lazy" src="images/img_9.jpg" alt="student testimonial">
+        </div>
+        <div class="gallery-slide">
+          <img loading="lazy" src="images/img_10.jpg" alt="student testimonial">
         </div>
       </div>
-      <button class="t-btn" onclick="moveT(1)" aria-label="הבא">‹</button>
     </div>
-    <div class="t-dots" id="tDots"></div>
+
+    <button class="gallery-btn gallery-next" onclick="moveGallery(1)">&#8250;</button>
+  </div>
+
+  <div class="gallery-dots" id="galleryDots">
+    <span class="dot active" onclick="goToSlide(0)"></span>
+    <span class="dot" onclick="goToSlide(1)"></span>
+    <span class="dot" onclick="goToSlide(2)"></span>
+    <span class="dot" onclick="goToSlide(3)"></span>
+    <span class="dot" onclick="goToSlide(4)"></span>
+    <span class="dot" onclick="goToSlide(5)"></span>
+    <span class="dot" onclick="goToSlide(6)"></span>
+    <span class="dot" onclick="goToSlide(7)"></span>
+    <span class="dot" onclick="goToSlide(8)"></span>
+  </div>
+
+</section>
+
+<hr class="divider"/>
+
+
+<hr class="divider"/>
+
+<!-- SUBJECTS -->
+<section id="subjects">
+  <div class="section-title">מקצועות ורמות</div>
+  <div class="section-sub">בחר רמת כיתה לסינון המקצועות המתאימים</div>
+
+  <!-- Tab filter -->
+  <div class="tabs" id="gradeTabs">
+    <button class="tab" data-filter="all">הכל</button>
+    <button class="tab active" data-filter="middle">חטיבת ביניים (ז׳–ט׳)</button>
+    <button class="tab" data-filter="high">תיכון (י׳–י״ב)</button>
+    <button class="tab" data-filter="math">מתמטיקה</button>
+    <button class="tab" data-filter="physics">פיזיקה</button>
+    <button class="tab" data-filter="cs">מחשבים</button>
+  </div>
+
+  <div class="cards-grid" id="cardsGrid">
+
+    <!-- ז׳–ט׳ מתמטיקה -->
+    <div class="card" data-tags="middle math">
+      <div class="card-header">
+        <div class="card-icon icon-math">∑</div>
+        <div>
+          <div class="card-title">מתמטיקה — ז׳–ט׳</div>
+          <div class="card-sub">חטיבת ביניים</div>
+        </div>
+      </div>
+      <ul class="topics">
+        <li>חשבון ואלגברה בסיסית</li>
+        <li>גיאומטריה ומשולשים</li>
+        <li>חזקות ושורשים</li>
+        <li>סטטיסטיקה והסתברות בסיסית</li>
+        <li>משוואות ואי-שוויונות</li>
+      </ul>
+      <div class="card-badges">
+        <span class="badge badge-math">כיתה ז׳</span>
+        <span class="badge badge-math">כיתה ח׳</span>
+        <span class="badge badge-math">כיתה ט׳</span>
+      </div>
+    </div>
+
+    <!-- י׳–י״ב מתמטיקה 3 יח׳ -->
+    <div class="card" data-tags="high math">
+      <div class="card-header">
+        <div class="card-icon icon-math">∑</div>
+        <div>
+          <div class="card-title">מתמטיקה — 3 יחידות</div>
+          <div class="card-sub">תיכון · י׳–י״ב</div>
+        </div>
+      </div>
+      <ul class="topics">
+        <li>פונקציות ומשוואות ריבועיות</li>
+        <li>סדרות חשבוניות וגיאומטריות</li>
+        <li>גיאומטריה אנליטית בסיסית</li>
+        <li>סטטיסטיקה והסתברות</li>
+        <li>מבוא לטריגונומטריה</li>
+      </ul>
+      <div class="card-badges">
+        <span class="badge badge-units">3 יח׳ לימוד</span>
+        <span class="badge badge-math">י׳–י״ב</span>
+      </div>
+    </div>
+
+    <!-- י׳–י״ב מתמטיקה 4 יח׳ -->
+    <div class="card" data-tags="high math">
+      <div class="card-header">
+        <div class="card-icon icon-math">∑</div>
+        <div>
+          <div class="card-title">מתמטיקה — 4 יחידות</div>
+          <div class="card-sub">תיכון · י׳–י״ב</div>
+        </div>
+      </div>
+      <ul class="topics">
+        <li>חשבון דיפרנציאלי ואינטגרלי</li>
+        <li>פונקציות מורכבות ונגזרות</li>
+        <li>טריגונומטריה מורחבת</li>
+        <li>קומבינטוריקה והסתברות</li>
+        <li>מספרים מרוכבים</li>
+      </ul>
+      <div class="card-badges">
+        <span class="badge badge-units">4 יח׳ לימוד</span>
+        <span class="badge badge-math">י׳–י״ב</span>
+      </div>
+    </div>
+
+    <!-- י׳–י״ב מתמטיקה 5 יח׳ -->
+    <div class="card" data-tags="high math">
+      <div class="card-header">
+        <div class="card-icon icon-math">∑</div>
+        <div>
+          <div class="card-title">מתמטיקה — 5 יחידות</div>
+          <div class="card-sub">תיכון · י׳–י״ב</div>
+        </div>
+      </div>
+      <ul class="topics">
+        <li>כל נושאי 4 יחידות</li>
+        <li>אינטגרל מסוים ושטחים</li>
+        <li>לוגריתמים ופונקציות מעריכיות</li>
+        <li>טריגנומטריה</li>
+        <li>וקטורים</li>
+        <li>גאומטריה אנליטית</li>
+        <li>מספרים מרוכבים</li>
+        <li>בעיות מורכבות</li>
+        <li>סדרות</li>
+        <li>בעיות תנועה</li>
+      </ul>
+      <div class="card-badges">
+        <span class="badge badge-units">5 יח׳ לימוד</span>
+        <span class="badge badge-math">י׳–י״ב</span>
+      </div>
+    </div>
+
+    <!-- ז׳–ט׳ פיזיקה -->
+    <div class="card" data-tags="middle physics">
+      <div class="card-header">
+        <div class="card-icon icon-phys">⚛</div>
+        <div>
+          <div class="card-title">פיזיקה — חטיבת ביניים</div>
+          <div class="card-sub">ז׳–ט׳</div>
+        </div>
+      </div>
+      <ul class="topics">
+        <li>מכניקה: כוחות ותנועה</li>
+        <li>אנרגיה, עבודה והספק</li>
+        <li>חשמל ומעגלים בסיסיים</li>
+        <li>גלים וקול</li>
+        <li>אור ואופטיקה</li>
+      </ul>
+      <div class="card-badges">
+        <span class="badge badge-phys">כיתה ז׳</span>
+        <span class="badge badge-phys">כיתה ח׳</span>
+        <span class="badge badge-phys">כיתה ט׳</span>
+      </div>
+    </div>
+
+    <!-- י׳–י״ב פיזיקה -->
+    <div class="card" data-tags="high physics">
+      <div class="card-header">
+        <div class="card-icon icon-phys">⚛</div>
+        <div>
+          <div class="card-title">פיזיקה — תיכון</div>
+          <div class="card-sub">י׳–י״ב · 5 יחידות</div>
+        </div>
+      </div>
+      <ul class="topics">
+        <li>מכניקה: קינמטיקה ודינמיקה</li>
+        <li>שימור אנרגיה ותנע</li>
+        <li>חשמל ומגנטיות</li>
+        <li>גלים ואופטיקה</li>
+      </ul>
+      <div class="card-badges">
+        <span class="badge badge-phys">כיתה י׳</span>
+        <span class="badge badge-phys">כיתה י״א</span>
+        <span class="badge badge-phys">כיתה י״ב</span>
+      </div>
+    </div>
+
+    <!-- ז׳–ט׳ מחשבים -->
+    <div class="card" data-tags="middle cs">
+      <div class="card-header">
+        <div class="card-icon icon-cs">⌨</div>
+        <div>
+          <div class="card-title">מחשבים — ז׳–ט׳</div>
+          <div class="card-sub">חטיבת ביניים</div>
+        </div>
+      </div>
+      <ul class="topics">
+        <li>מבוא לתכנות — Scratch / Python</li>
+        <li>לוגיקה ואלגוריתמיקה</li>
+        <li>מבני נתונים בסיסיים</li>
+        <li>פתרון בעיות חישוביות</li>
+      </ul>
+      <div class="card-badges">
+        <span class="badge badge-cs">כיתה ז׳</span>
+        <span class="badge badge-cs">כיתה ח׳</span>
+        <span class="badge badge-cs">כיתה ט׳</span>
+      </div>
+    </div>
+
+    <!-- י׳–י״ב מדעי המחשב -->
+    <div class="card" data-tags="high cs">
+      <div class="card-header">
+        <div class="card-icon icon-cs">⌨</div>
+        <div>
+          <div class="card-title">מדעי המחשב — תיכון</div>
+          <div class="card-sub">י׳–י״ב</div>
+        </div>
+      </div>
+      <ul class="topics">
+        <li>Python — תכנות מתקדם</li>
+        <li>כל מבני הנתונים</li>
+        <li>אלגוריתמי מיון וחיפוש</li>
+        <li>רקורסיה ותכנות דינמי</li>
+        <li>מודלים חישוביים</li>
+      </ul>
+      <div class="card-badges">
+        <span class="badge badge-cs">כיתה י׳</span>
+        <span class="badge badge-cs">כיתה י״א</span>
+        <span class="badge badge-cs">כיתה י״ב</span>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<hr class="rule"/>
+<hr class="divider"/>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="container">
-    <div class="about-grid">
-      <div class="about-photo reveal">
-        <img loading="lazy" src="images/img_1.jpg" alt="אלירן גלברג"/>
-      </div>
-      <div class="reveal">
-        <p class="eyebrow">אודות</p>
-        <h2 style="margin-bottom:1.5rem;">מי מלמד את הילד שלכם</h2>
-        <h3>מי אני?</h3>
-        <p>אני אלירן גלברג, חייל בן 20, בוגר 5 יחידות מתמטיקה, 5 יחידות פיזיקה ו-10 יחידות מדעי המחשב — בהצטיינות יתרה, עם תעודת הצטיינות של משרד החינוך. אני יודע בדיוק מה עובר על תלמיד בבלבול, עומס וחוסר מוטיבציה. אני כאן כדי לעשות סדר בראש, לא רק לעבור את המבחן.</p>
-        <h3>הגישה שלי</h3>
-        <p>אני מלמד בשיטה בהירה ומסודרת: מצגות, תרשימים ושאלות חשיבה בכל שיעור, וסיכום + שיעורי בית בסופו. יש לי בנק שאלות תרגול עשיר, וזמינות גם אחרי השיעור עצמו.</p>
-        <ul class="about-credentials">
-          <li>📞 <a href="tel:+972586053334">058-6053334</a></li>
-          <li>💬 <a href="https://wa.me/972586053334" target="_blank">וואטסאפ</a></li>
-          <li>📍 רמת פולג, נתניה · פרונטלי או בזום לכל הארץ</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="rule"/>
-
-<!-- MATERIALS PREVIEW -->
+<!-- PREVIEW -->
 <section id="preview">
-  <div class="container">
-    <div class="approach-header reveal">
-      <p class="eyebrow">טעימה ממה שמחכה לכם</p>
-      <h2>מצגות, תרשימים וסיכומים אמיתיים</h2>
+  <div class="section-title">טעימה ממה שמחכה לך</div>
+  <div class="section-sub">מצגות, תרשימים וסיכומי שיעור — כלים שאני שולח לכל תלמיד</div>
+
+  <div class="preview-grid">
+
+    <!-- מצגות -->
+    <div class="preview-col">
+      <div class="preview-col-header">
+        <div class="preview-col-icon" style="background:#dbeaf5;color:var(--tag-math);">📊</div>
+        <div>
+          <div class="preview-col-title">מצגות לימוד</div>
+          <div class="preview-col-sub">מסודרות לפי נושא, ברורות ומדויקות</div>
+        </div>
+      </div>
+      <div class="preview-slots">
+        <div class="preview-slot" style="padding:0;overflow:hidden;position:relative;">
+          <img loading="lazy" src="images/img_11.jpg" alt="מצגת עצים בינאריים" style="width:100%;height:100%;object-fit:cover;border-radius:8px;display:block;"/>
+          <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(15,15,40,0.85);display:flex;gap:.5rem;align-items:center;justify-content:center;padding:.55rem;border-radius:0 0 8px 8px;"><button onclick="openLightboxPDF(this.closest('.preview-slot').querySelector('a').href)" style="background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);border-radius:6px;padding:.3rem .9rem;font-size:.8rem;cursor:pointer;font-family:inherit;">👁 צפה</button><button onclick="this.closest('.preview-slot').querySelector('a').click()" style="background:var(--accent);color:white;border:none;border-radius:6px;padding:.3rem .9rem;font-size:.8rem;cursor:pointer;font-family:inherit;">📥 הורד</button></div>
+          <a href="files/doc_1.pdf" download="עצים_בינאריים.pdf" style="display:none;"></a>
+        </div>
+        <!-- מצגת תור -->
+        <div class="preview-slot" style="padding:0;overflow:hidden;position:relative;">
+          <img loading="lazy" src="images/img_12.jpg" style="width:100%;display:block;border-radius:8px;">
+          <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(15,15,40,0.85);display:flex;gap:.5rem;align-items:center;justify-content:center;padding:.55rem;border-radius:0 0 8px 8px;"><button onclick="openLightboxPDF(this.closest('.preview-slot').querySelector('a').href)" style="background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);border-radius:6px;padding:.3rem .9rem;font-size:.8rem;cursor:pointer;font-family:inherit;">👁 צפה</button><button onclick="this.closest('.preview-slot').querySelector('a').click()" style="background:var(--accent);color:white;border:none;border-radius:6px;padding:.3rem .9rem;font-size:.8rem;cursor:pointer;font-family:inherit;">📥 הורד</button></div>
+          <a href="files/doc_2.pdf" download="תור-Queue.pdf" style="display:none"></a>
+        </div>
+      </div>
     </div>
-    <div class="materials-grid reveal">
-      <div class="material-item" onclick="openLightboxPDF('files/doc_1.pdf')">
-        <img loading="lazy" src="images/img_11.jpg" alt="מצגת עצים בינאריים"/>
-        <div class="material-caption">מצגת · עצים בינאריים</div>
+
+    <!-- תרשימים -->
+    <div class="preview-col">
+      <div class="preview-col-header">
+        <div class="preview-col-icon" style="background:#ece6f7;color:var(--tag-physics);">📐</div>
+        <div>
+          <div class="preview-col-title">תרשימים והמחשות</div>
+          <div class="preview-col-sub">ויזואליזציה של רעיונות מורכבים</div>
+        </div>
       </div>
-      <div class="material-item" onclick="openLightboxPDF('files/doc_2.pdf')">
-        <img loading="lazy" src="images/img_12.jpg" alt="מצגת תור"/>
-        <div class="material-caption">מצגת · תור (Queue)</div>
-      </div>
-      <div class="material-item" onclick="openLightbox('images/img_13.jpg')">
-        <img loading="lazy" src="images/img_13.jpg" alt="תרשים פיזיקה"/>
-        <div class="material-caption">תרשים · פיזיקה</div>
-      </div>
-      <div class="material-item" onclick="openLightbox('images/img_15.jpg')">
-        <img loading="lazy" src="images/img_15.jpg" alt="סיכום שיעור"/>
-        <div class="material-caption">סיכום שיעור</div>
+      <div class="preview-slots">
+        <div class="preview-slot empty" style="position:relative;cursor:pointer;" onclick="openLightbox(this.querySelector('img').src)">
+          <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.6);color:white;font-size:.78rem;text-align:center;padding:.4rem;border-radius:0 0 8px 8px;opacity:0;transition:opacity .2s;" class="lbx-hint">👁 לחץ לצפייה</div>
+          <img loading="lazy" src="images/img_13.jpg" alt="תרשים פיזיקה"/>
+        </div>
+        <div class="preview-slot" style="padding:0;overflow:hidden;position:relative;cursor:pointer;" onclick="openLightbox(this.querySelector('img').src)">
+          <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.6);color:white;font-size:.78rem;text-align:center;padding:.4rem;border-radius:0 0 8px 8px;opacity:0;transition:opacity .2s;" class="lbx-hint">👁 לחץ לצפייה</div>
+          <img loading="lazy" src="images/img_14.jpg" alt="מהטבלה לגרף — מדריך ניתוח יחסים בפיזיקה" style="width:100%;display:block;"/>
+        </div>
       </div>
     </div>
+
+    <!-- סיכומי שיעור -->
+    <div class="preview-col">
+      <div class="preview-col-header">
+        <div class="preview-col-icon" style="background:#daf0e7;color:var(--tag-cs);">📝</div>
+        <div>
+          <div class="preview-col-title">סיכומי שיעור</div>
+          <div class="preview-col-sub">נשלחים בסוף כל שיעור — תמיד מסודרים</div>
+        </div>
+      </div>
+      <div class="preview-slots">
+                <div class="preview-slot" style="padding:0;overflow:hidden;position:relative;cursor:pointer;" onclick="openLightbox(this.querySelector('img').src)">
+          <img loading="lazy" src="images/img_15.jpg" style="width:100%;height:100%;object-fit:cover;">
+          <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.6);color:white;font-size:.78rem;text-align:center;padding:.4rem;border-radius:0 0 8px 8px;opacity:0;transition:opacity .2s;" class="lbx-hint">&#128065; &#1500;&#1495;&#1509; &#1500;&#1510;&#1508;&#1497;&#1497;&#1492;</div>
+        </div>
+                <div class="preview-slot" style="padding:0;overflow:hidden;position:relative;cursor:pointer;" onclick="openLightbox(this.querySelector('img').src)">
+          <img loading="lazy" src="images/img_16.jpg" style="width:100%;height:100%;object-fit:cover;">
+          <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.6);color:white;font-size:.78rem;text-align:center;padding:.4rem;border-radius:0 0 8px 8px;opacity:0;transition:opacity .2s;" class="lbx-hint">&#128065; &#1500;&#1495;&#1509; &#1500;&#1510;&#1508;&#1497;&#1497;&#1492;</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<hr class="rule"/>
+<hr class="divider"/>
 
 <!-- PRICING -->
 <section id="pricing">
-  <div class="container">
-    <div class="approach-header reveal">
-      <p class="eyebrow">מחירים</p>
-      <h2>פרונטלי ברמת פולג, או בזום לכל הארץ</h2>
-    </div>
-    <div class="pricing-grid reveal">
-      <div class="price-primary">
-        <p class="subject-eyebrow">שיעור פרטי</p>
-        <div style="margin-top:0.5rem;"><b>₪140</b><span class="unit-label">לשעה</span></div>
-        <p style="color:var(--muted); margin-top:0.75rem;">תלמיד אחד, קצב אישי מלא.</p>
-        <ul class="included-list">
-          <li>סיכום שיעור + שיעורי בית</li>
-          <li>פרונטלי או זום</li>
-          <li>זמינות מלאה לשאלות</li>
-          <li>מצגות, תרשימים ובנק שאלות תרגול — ללא עלות נוספת</li>
-        </ul>
+  <div class="section-title">מחירים</div>
+  <div class="section-sub">פרונטלי באזור נתניה / רמת פולג, או בזום — לכל רחבי הארץ</div>
+  <div class="cards-grid" style="grid-template-columns: repeat(auto-fill, minmax(260px,1fr));">
+
+    <div class="card" style="border-top: 3px solid var(--accent);">
+      <div class="card-header">
+        <div class="card-icon icon-math" style="font-size:.9rem;font-weight:700;">1:1</div>
+        <div>
+          <div class="card-title">שיעור פרטי</div>
+          <div class="card-sub">תלמיד אחד</div>
+        </div>
       </div>
-      <div class="price-secondary">
-        <p class="subject-eyebrow">קבוצה קטנה</p>
-        <div style="margin-top:0.5rem;"><b>₪110</b><span class="unit-label">לתלמיד/לשעה</span></div>
-        <p style="color:var(--muted); margin-top:0.75rem;">עד 3 תלמידים, אותה איכות הוראה.</p>
+      <div style="font-size:2rem;font-weight:700;color:var(--accent);margin-bottom:.3rem;">₪140</div>
+      <div style="font-size:.8rem;color:var(--muted);margin-bottom:1rem;">לשעה</div>
+      <ul class="topics">
+        <li>התאמה מלאה לקצב האישי</li>
+        <li>פרונטלי או זום</li>
+        <li>סיכום שיעור + שיעורי בית</li>
+        <li>זמינות מלאה לשאלות</li>
+      </ul>
+    </div>
+
+    <div class="card" style="border-top: 3px solid var(--tag-cs);">
+      <div class="card-header">
+        <div class="card-icon icon-cs" style="font-size:.85rem;font-weight:700;">קבוצה</div>
+        <div>
+          <div class="card-title">קבוצה קטנה</div>
+          <div class="card-sub">עד 3 תלמידים</div>
+        </div>
+      </div>
+      <div style="font-size:2rem;font-weight:700;color:var(--tag-cs);margin-bottom:.3rem;">₪110</div>
+      <div style="font-size:.8rem;color:var(--muted);margin-bottom:1rem;">לתלמיד לשעה</div>
+      <ul class="topics">
+        <li>חיסכון משמעותי</li>
+        <li>אווירה לימודית פעילה</li>
+        <li>פרונטלי או זום</li>
+        <li>סיכום שיעור + שיעורי בית</li>
+      </ul>
+    </div>
+
+    <div class="card" style="border-top: 3px solid #8a5c00;">
+      <div class="card-header">
+        <div class="card-icon icon-gen">🎁</div>
+        <div>
+          <div class="card-title">כלול בכל שיעור</div>
+          <div class="card-sub">ללא עלות נוספת</div>
+        </div>
+      </div>
+      <ul class="topics" style="margin-top:.3rem;">
+        <li>מצגות וחומרי לימוד</li>
+        <li>תרשימים ושאלות חשיבה</li>
+        <li>בנק שאלות תרגול</li>
+        <li>סיכום שיעור מסודר</li>
+        <li>זמינות לאחר השיעור לשאלות</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-title">אודות</div>
+  <div class="section-sub">קצת עליי ועל הגישה שלי</div>
+  <div class="about-grid">
+    <div class="about-sidebar">
+      <img loading="lazy" src="images/img_17.jpg" alt="אלירן גלברג" style="width:100%;max-width:280px;height:320px;border-radius:14px;object-fit:cover;object-position:top center;border:3px solid var(--accent);margin:0 auto 1rem;display:block;"/>
+      <div class="about-name">אלירן גלברג</div>
+      <div class="about-role">מורה פרטי · רמת פולג, נתניה</div>
+      <ul class="contact-list" id="contact">
+        <li>📞 <a href="tel:+972586053334">058-6053334</a></li>
+        <li>💬 <a href="https://wa.me/972586053334" target="_blank">וואטסאפ</a></li>
+        <li>📍 רמת פולג, נתניה</li>
+        <li>🖥️ זום — לכל הארץ</li>
+      </ul>
+    </div>
+    <div class="about-body">
+      <h3>מי אני?</h3>
+      <p>
+        אני אלירן גלברג, חייל בן 20, בוגר 5 יחידות מתמטיקה, 5 יחידות פיזיקה ו-10 יחידות מדעי המחשב–סייבר — בהצטיינות יתרה, עם תעודת הצטיינות של משרד החינוך. אני יודע בדיוק מה עובר על תלמיד בלבול, עומס וחוסר מוטיבציה. אני כאן כדי לעשות לך סדר בראש ולא רק לעבור את המבחן.
+      </p>
+      <h3>הגישה שלי</h3>
+      <p>
+        אני מלמד בשיטה ייחודית — בהירה, מסודרת ומותאמת אישית. בכל שיעור: מצגות, תרשימים ושאלות חשיבה והסקה. בסוף כל מפגש אני שולח סיכום שיעור מסודר ושיעורי בית. יש לי בנק שאלות תרגול עשיר וחומרים שאני שולח לתלמידים. ואני זמין תמיד — גם אחרי השיעור.
+      </p>
+      <h3>מה מקבלים</h3>
+      <div class="about-tags">
+        <span class="about-tag">📊 מצגות וחומרי לימוד</span>
+        <span class="about-tag">📝 סיכום שיעור</span>
+        <span class="about-tag">📚 שיעורי בית</span>
+        <span class="about-tag">💬 זמינות מלאה</span>
+        <span class="about-tag">🎯 הכנה לבגרות</span>
+        <span class="about-tag">🖥️ פרונטלי / זום</span>
+        <span class="about-tag">🏅 בוגר בהצטיינות</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FINAL CTA -->
-<section class="final-cta">
-  <div class="container reveal">
-    <h2>מוכנים להתחיל?</h2>
-    <p>שיעור אחד מספיק כדי לדעת אם זה מתאים.</p>
-    <a href="#contact-form" class="btn btn-primary">קובעים שיעור</a>
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-title">שאלות נפוצות</div>
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">
+        <span>כיצד משלמים?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <hr class="faq-divider"/>
+      <div class="faq-a">ניתן לשלם במזומן או בפייבוקס — בנוחות שמתאימה לכם.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">
+        <span>כמה זמן ניתן לבטל מראש?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <hr class="faq-divider"/>
+      <div class="faq-a">ביטול עד 24 שעות לפני השיעור — ללא חיוב כלל.<br/>ביטול בין שעה ל-24 שעות לפני — ייגבו 50% מהמחיר.<br/>ביטול פחות משעה לפני השיעור — ייגבה התשלום המלא.<br/><br/>אם אני מבטל שיעור מכל סיבה שהיא — אין חיוב בכלל.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">
+        <span>עדיף בזום או פרונטלי?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <hr class="faq-divider"/>
+      <div class="faq-a">אני גמיש — ניתן כל פעם לשנות את אופי השיעור לבחירתכם. הן בזום והן פרונטלי השיעורים מתקיימים באופן המקצועי ביותר.<br/><br/>במידה ונקיים שיעור בזום, נא לדאוג לסביבה שקטה, חיבור רשת תקין, ומצלמה. במידה ואחד מהדברים יוביל לביטול השיעור- ייגבה תשלום חלקי בהתאם.</div>
+    </div>
+
   </div>
 </section>
+
+<hr class="divider"/>
 
 <!-- LEAD FORM -->
-<section id="contact-form" style="background:var(--beige);">
-  <div class="container">
-    <div class="approach-header reveal" style="text-align:center; margin: 0 auto 2rem;">
-      <p class="eyebrow">מתעניינים? השאירו פרטים</p>
-      <h2>חוזרים אליכם באותו יום</h2>
-    </div>
-    <div class="lead-card reveal">
-      <form id="leadForm">
-        <div class="lead-grid">
-          <div class="lead-field full">
-            <label for="lead-name">שם מלא *</label>
-            <input type="text" id="lead-name" name="full_name" required maxlength="100" autocomplete="name"/>
-          </div>
-          <div class="lead-field full">
-            <label for="lead-phone">טלפון *</label>
-            <input type="tel" id="lead-phone" name="phone" required pattern="0[0-9]{8,9}" placeholder="05XXXXXXXX" autocomplete="tel"/>
-          </div>
-          <div class="lead-field full">
-            <label for="lead-grade">כיתה</label>
-            <select id="lead-grade" name="grade">
-              <option value="">בחרו כיתה</option>
-              <option value="ז׳">ז׳</option>
-              <option value="ח׳">ח׳</option>
-              <option value="ט׳">ט׳</option>
-              <option value="י׳">י׳</option>
-              <option value="י״א">י״א</option>
-              <option value="י״ב">י״ב</option>
-              <option value="אחר">אחר</option>
-            </select>
-          </div>
-          <div class="lead-field full">
-            <label for="lead-message">מה תרצו לספר לי? (לא חובה)</label>
-            <textarea id="lead-message" name="message" maxlength="500" placeholder="באיזה מקצוע צריך עזרה, מתי נוח, וכו׳"></textarea>
-          </div>
-          <div class="lead-field lead-hp" aria-hidden="true">
-            <label for="lead-website">Website</label>
-            <input type="text" id="lead-website" name="website" tabindex="-1" autocomplete="off"/>
-          </div>
+<section id="contact-form">
+  <div class="section-title">מתעניינים? השאירו פרטים</div>
+  <div class="section-sub">חוזרים אליכם באותו יום - בלי התחייבות</div>
+
+  <div class="lead-card">
+    <form id="leadForm">
+      <div class="lead-grid">
+        <div class="lead-field full">
+          <label for="lead-name">שם מלא *</label>
+          <input type="text" id="lead-name" name="full_name" required maxlength="100" autocomplete="name"/>
         </div>
-        <div class="lead-submit-row">
-          <button type="submit" class="btn btn-primary" id="leadSubmitBtn">שליחת פרטים</button>
+        <div class="lead-field full">
+          <label for="lead-phone">טלפון *</label>
+          <input type="tel" id="lead-phone" name="phone" required pattern="0[0-9]{8,9}" placeholder="05XXXXXXXX" autocomplete="tel"/>
         </div>
-        <div id="leadMsg" class="lead-msg" style="display:none;"></div>
-      </form>
-    </div>
+        <div class="lead-field full">
+          <label for="lead-grade">כיתה</label>
+          <select id="lead-grade" name="grade">
+            <option value="">בחרו כיתה</option>
+            <option value="ז׳">ז׳</option>
+            <option value="ח׳">ח׳</option>
+            <option value="ט׳">ט׳</option>
+            <option value="י׳">י׳</option>
+            <option value="י״א">י״א</option>
+            <option value="י״ב">י״ב</option>
+            <option value="אחר">אחר</option>
+          </select>
+        </div>
+        <div class="lead-field full">
+          <label for="lead-message">מה תרצו לספר לי? (לא חובה)</label>
+          <textarea id="lead-message" name="message" maxlength="500" placeholder="באיזה מקצוע צריך עזרה, מתי נוח, וכו׳"></textarea>
+        </div>
+        <div class="lead-field lead-hp" aria-hidden="true">
+          <label for="lead-website">Website</label>
+          <input type="text" id="lead-website" name="website" tabindex="-1" autocomplete="off"/>
+        </div>
+      </div>
+      <div class="lead-submit-row">
+        <button type="submit" class="btn btn-primary" id="leadSubmitBtn">שליחת פרטים</button>
+      </div>
+      <div id="leadMsg" class="lead-msg" style="display:none;"></div>
+    </form>
   </div>
 </section>
 
 <footer>
-  <p>© 2026 · אלירן גלברג · מורה פרטי — רמת פולג, נתניה · <a href="tel:+972586053334">058-6053334</a></p>
+  <p>© 2026 · אלירן גלברג · מורה פרטי — רמת פולג, נתניה · <a href="tel:+972586053334" style="color:var(--yellow);text-decoration:none;">058-6053334</a></p>
 </footer>
 
-<!-- LIGHTBOX -->
-<div id="lbx" style="display:none; position:fixed; inset:0; background:rgba(14,39,64,0.94); z-index:999; align-items:center; justify-content:center;" onclick="if(event.target===this) closeLightbox()">
-  <button onclick="closeLightbox()" style="position:absolute; top:1.2rem; right:1.2rem; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); color:white; border-radius:50%; width:2.4rem; height:2.4rem; font-size:1.2rem; cursor:pointer; line-height:1; z-index:1;">✕</button>
-  <img id="lbx-img" style="display:none; max-width:92vw; max-height:88vh; border-radius:8px;"/>
-  <iframe id="lbx-pdf" style="display:none; width:90vw; height:88vh; border:none; border-radius:8px; background:white;"></iframe>
-</div>
-
 <script>
-  // ─── NAV DRAWER ───
-  var navToggle = document.getElementById('navToggle');
-  var navDrawer = document.getElementById('navDrawer');
-  navToggle.addEventListener('click', function () {
-    var open = navDrawer.classList.toggle('open');
-    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-  navDrawer.querySelectorAll('a').forEach(function (a) {
-    a.addEventListener('click', function () { navDrawer.classList.remove('open'); });
-  });
-
-  // ─── REVEAL ON SCROLL ───
-  var revealEls = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    revealEls.forEach(function (el) { io.observe(el); });
-  } else {
-    revealEls.forEach(function (el) { el.classList.add('in'); });
-  }
-
-  // ─── TESTIMONIAL CAROUSEL ───
-  var tCurrent = 0;
-  var tSlides = document.querySelectorAll('#tTrack .t-slide');
-  var tDotsWrap = document.getElementById('tDots');
-  tSlides.forEach(function (_, i) {
-    var d = document.createElement('button');
-    d.className = 't-dot' + (i === 0 ? ' active' : '');
-    d.setAttribute('aria-label', 'תמונה ' + (i + 1));
-    d.onclick = function () { goToT(i); };
-    tDotsWrap.appendChild(d);
-  });
-  function updateT() {
-    document.getElementById('tTrack').style.transform = 'translateX(' + (tCurrent * 100) + '%)';
-    tDotsWrap.querySelectorAll('.t-dot').forEach(function (d, i) {
-      d.classList.toggle('active', i === tCurrent);
+  // ─── TAB FILTER ───
+  const tabs = document.querySelectorAll('.tab');
+  const cards = document.querySelectorAll('#cardsGrid .card');
+  function applyFilter(filter) {
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.filter === filter));
+    cards.forEach(card => {
+      const tags = card.dataset.tags || '';
+      card.style.display = (filter === 'all' || tags.split(' ').includes(filter)) ? '' : 'none';
     });
   }
-  function moveT(dir) {
-    tCurrent = (tCurrent + dir + tSlides.length) % tSlides.length;
-    updateT();
-  }
-  function goToT(i) { tCurrent = i; updateT(); }
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => applyFilter(tab.dataset.filter));
+  });
+  applyFilter('middle');
 
-  // ─── LIGHTBOX ───
-  function openLightbox(src) {
-    var lb = document.getElementById('lbx');
-    var img = document.getElementById('lbx-img');
-    var pdf = document.getElementById('lbx-pdf');
-    img.src = src; img.style.display = 'block';
-    pdf.style.display = 'none'; pdf.src = '';
-    lb.style.display = 'flex';
+  // ─── GALLERY ───
+  let currentSlide = 0;
+  const totalSlides = document.querySelectorAll('.gallery-slide').length;
+  let autoTimer = setInterval(() => moveGallery(1), 4000);
+
+  function moveGallery(dir) {
+    currentSlide = (currentSlide + dir + totalSlides) % totalSlides;
+    updateGallery();
+    resetTimer();
   }
-  function openLightboxPDF(src) {
-    var lb = document.getElementById('lbx');
-    var img = document.getElementById('lbx-img');
-    var pdf = document.getElementById('lbx-pdf');
-    pdf.src = src; pdf.style.display = 'block';
-    img.style.display = 'none'; img.src = '';
-    lb.style.display = 'flex';
+  function goToSlide(n) {
+    currentSlide = n;
+    updateGallery();
+    resetTimer();
   }
-  function closeLightbox() {
-    var lb = document.getElementById('lbx');
-    lb.style.display = 'none';
-    document.getElementById('lbx-img').src = '';
-    document.getElementById('lbx-pdf').src = '';
+  function updateGallery() {
+    const track = document.getElementById('galleryTrack');
+    if (track) track.style.transform = `translateX(${currentSlide * 100}%)`;
+    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+  }
+  function resetTimer() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => moveGallery(1), 4000);
   }
 
-  // ─── LEAD FORM (unchanged endpoint/logic) ───
+  // ─── SMOOTH SCROLL ───
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });  // ─── HAMBURGER NAV ───
+  const navToggleBtn = document.getElementById('navToggle');
+  const navList = document.querySelector('.nav-links');
+  if (navToggleBtn) {
+    navToggleBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      navList.classList.toggle('open');
+    });
+    document.addEventListener('click', e => {
+      if (!e.target.closest('nav')) navList.classList.remove('open');
+    });
+    navList.querySelectorAll('a').forEach(a =>
+      a.addEventListener('click', () => navList.classList.remove('open'))
+    );
+  }
+
+  // ─── SCROLL INDICATOR ───
+  const scrollIndicator = document.querySelector('.scroll-indicator');
+  if (scrollIndicator) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 80) {
+        scrollIndicator.classList.add('hidden');
+      } else {
+        scrollIndicator.classList.remove('hidden');
+      }
+    }, { passive: true });
+    scrollIndicator.addEventListener('click', () => {
+      window.scrollBy({ top: window.innerHeight * 0.8, behavior: 'smooth' });
+    });
+  }
+
+  function torGo(n) { torCur = n; torUpdate(); }
+  function torUpdate() {
+    document.querySelector('.tor-track').style.transform = 'translateX(' + (torCur * 100) + '%)';
+    document.querySelectorAll('.tor-dot').forEach((d,i) => {
+      d.style.background = i === torCur ? 'var(--accent)' : 'rgba(255,255,255,.6)';
+    });
+  }
+</script>
+
+<div id="lbx" onclick="if(event.target===this)closeLightbox()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999;align-items:center;justify-content:center;">
+  <button onclick="closeLightbox()" style="position:absolute;top:1.2rem;right:1.2rem;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;border-radius:50%;width:2.4rem;height:2.4rem;font-size:1.2rem;cursor:pointer;line-height:1;z-index:1;">✕</button>
+  <img loading="lazy" id="lbx-img" src="" style="display:none;max-width:92vw;max-height:92vh;object-fit:contain;border-radius:10px;cursor:zoom-out;"/>
+  <iframe id="lbx-pdf" src="" style="display:none;width:88vw;height:92vh;border:none;border-radius:10px;" allowfullscreen></iframe>
+</div>
+<script>
+function closeLightbox(){
+  var lb=document.getElementById('lbx');
+  lb.style.display='none';
+  document.getElementById('lbx-img').src='';
+  document.getElementById('lbx-pdf').src='';
+  document.getElementById('lbx-img').style.display='none';
+  document.getElementById('lbx-pdf').style.display='none';
+}
+function openLightbox(src){
+  var lb=document.getElementById('lbx');
+  var img=document.getElementById('lbx-img');
+  var pdf=document.getElementById('lbx-pdf');
+  img.src=src; img.style.display='block';
+  pdf.style.display='none';
+  lb.style.cursor='zoom-out';
+  lb.style.display='flex';
+}
+function openLightboxPDF(src){
+  window.open(src,'_blank');
+}
+</script>
+
+<script>
+  // ─── FAQ ACCORDION ───
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>
+
+<script>
+  // ─── LEAD FORM ───
   document.getElementById('leadForm').addEventListener('submit', async function (e) {
     e.preventDefault();
-    var form = e.target;
-    var btn = document.getElementById('leadSubmitBtn');
-    var msg = document.getElementById('leadMsg');
+    const form = e.target;
+    const btn = document.getElementById('leadSubmitBtn');
+    const msg = document.getElementById('leadMsg');
     msg.style.display = 'none';
 
-    var payload = {
+    const payload = {
       full_name: form.full_name.value.trim(),
       phone: form.phone.value.trim(),
       grade: form.grade.value,
       message: form.message.value.trim(),
-      website: form.website.value,
+      website: form.website.value, // honeypot
     };
 
     btn.disabled = true;
     btn.textContent = 'שולח...';
 
     try {
-      var res = await fetch('https://app.elirangelberg.com/api/leads', {
+      const res = await fetch('https://app.elirangelberg.com/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
-      var data = await res.json().catch(function () { return {}; });
+      const data = await res.json().catch(() => ({}));
 
       if (res.ok && data.success) {
         form.reset();
         msg.textContent = 'תודה! קיבלתי את הפרטים שלך ואחזור אליך בהקדם 🙌';
         msg.className = 'lead-msg success';
       } else {
-        msg.textContent = (data && data.error) || 'משהו השתבש - אפשר גם לשלוח לי הודעה בוואטסאפ.';
+        msg.textContent = (data && data.error) || 'משהו השתבש - אפשר גם לשלוח לי הודעה בוואטסאפ למעלה.';
         msg.className = 'lead-msg error';
       }
     } catch (err) {
-      msg.textContent = 'לא הצלחנו לשלוח - בדקו את החיבור לאינטרנט, או שלחו לי הודעה בוואטסאפ.';
+      msg.textContent = 'לא הצלחנו לשלוח - בדקו את החיבור לאינטרנט, או שלחו לי הודעה בוואטסאפ למעלה.';
       msg.className = 'lead-msg error';
     } finally {
       msg.style.display = 'block';
@@ -954,6 +1748,5 @@
     }
   });
 </script>
-
 </body>
 </html>
