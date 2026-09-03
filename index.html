@@ -971,6 +971,23 @@
     .lead-msg { margin-top: 1rem; text-align: center; font-size: .9rem; }
     .lead-msg.success { color: #1a7a4a; }
     .lead-msg.error { color: #b3261e; }
+
+    /* Scroll-in animations. The .reveal class is added only by JS
+       (see the script near the end of body), so with JS disabled
+       nothing is ever hidden - this is additive, not required. */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
+      will-change: opacity, transform;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { transition: none; opacity: 1; transform: none; }
+    }
   </style>
 </head>
 <body>
@@ -1747,6 +1764,112 @@ function openLightboxPDF(src){
       btn.textContent = 'שליחת פרטים';
     }
   });
+</script>
+
+<script>
+  // ─── SCROLL-IN ANIMATIONS ───
+  // Progressive enhancement: elements get the .reveal class (defined in
+  // <style>, starts at opacity:0) only here in JS, right before we start
+  // observing them - so if this script ever fails, nothing is left stuck
+  // invisible. Sections fade + rise into place once, the first time they
+  // scroll into view; cards/items inside a group stagger slightly instead
+  // of popping in all at once.
+  (function () {
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function tag(selector, staggerMs) {
+      var nodes = Array.prototype.slice.call(document.querySelectorAll(selector));
+      var counters = new Map();
+      nodes.forEach(function (el) {
+        el.classList.add('reveal');
+        if (staggerMs) {
+          var i = counters.get(el.parentElement) || 0;
+          el.style.transitionDelay = Math.min(i, 8) * staggerMs + 'ms';
+          counters.set(el.parentElement, i + 1);
+        }
+      });
+      return nodes;
+    }
+
+    var groups = [
+      tag('#testimonials .section-title, #testimonials .section-sub'),
+      tag('#testimonials .gallery-wrapper, #testimonials .gallery-dots'),
+      tag('#subjects .section-title, #subjects .section-sub, #subjects .tabs'),
+      tag('#subjects .card', 60),
+      tag('#preview .section-title, #preview .section-sub'),
+      tag('#preview .preview-col', 100),
+      tag('#pricing .section-title, #pricing .section-sub'),
+      tag('#pricing .card', 90),
+      tag('#about .section-title, #about .section-sub'),
+      tag('#about .about-sidebar, #about .about-body', 120),
+      tag('#faq .section-title, #faq .section-sub'),
+      tag('#faq .faq-item', 60),
+      tag('#contact-form .section-title, #contact-form .section-sub, #contact-form .lead-card'),
+    ];
+    var allEls = [].concat.apply([], groups);
+
+    if (reduceMotion) {
+      allEls.forEach(function (el) { el.classList.add('is-visible'); });
+    } else {
+      // IntersectionObserver is the primary mechanism, but a throttled
+      // scroll/resize fallback backs it up - belt and suspenders, so a
+      // section can never end up permanently stuck at opacity:0 because
+      // of some odd browser/extension edge case IO didn't fire for.
+      var pending = allEls.slice();
+
+      function revealIfVisible() {
+        var vh = window.innerHeight || document.documentElement.clientHeight;
+        pending = pending.filter(function (el) {
+          var r = el.getBoundingClientRect();
+          if (r.top < vh - 60 && r.bottom > 0) {
+            el.classList.add('is-visible');
+            return false;
+          }
+          return true;
+        });
+      }
+
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              io.unobserve(entry.target);
+              pending = pending.filter(function (el) { return el !== entry.target; });
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+        allEls.forEach(function (el) { io.observe(el); });
+      }
+
+      var ticking = false;
+      window.addEventListener('scroll', function () {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () { revealIfVisible(); ticking = false; });
+      }, { passive: true });
+      window.addEventListener('resize', function () { revealIfVisible(); });
+      revealIfVisible();
+    }
+
+    // The hero is already on-screen at load, so it plays as a one-time
+    // entrance instead of waiting on a scroll trigger.
+    var heroEls = [document.querySelector('.hero-text'), document.querySelector('.hero-card')];
+    heroEls.forEach(function (el, i) {
+      if (!el) return;
+      el.classList.add('reveal');
+      el.style.transitionDelay = (i * 150) + 'ms';
+    });
+    if (reduceMotion) {
+      heroEls.forEach(function (el) { if (el) el.classList.add('is-visible'); });
+    } else {
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          heroEls.forEach(function (el) { if (el) el.classList.add('is-visible'); });
+        });
+      });
+    }
+  })();
 </script>
 </body>
 </html>
