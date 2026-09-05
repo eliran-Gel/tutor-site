@@ -198,6 +198,7 @@
 
     /* ─── HERO ─── */
     .hero {
+      position: relative;
       max-width: 1100px;
       margin: 0 auto;
       padding: 5rem 2rem 3.5rem;
@@ -205,6 +206,29 @@
       grid-template-columns: 1fr 1fr;
       gap: 3rem;
       align-items: center;
+    }
+    /* Slow-drifting blurred glow behind the hero - ambient movement instead
+       of a static flat background, the kind of subtle motion that reads as
+       "considered" rather than "AI template" without being distracting. */
+    .hero-glow {
+      position: absolute;
+      top: -60px;
+      inset-inline-end: -40px;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(30,58,127,0.16) 0%, rgba(30,58,127,0) 70%);
+      filter: blur(10px);
+      pointer-events: none;
+      z-index: 0;
+      animation: heroGlowDrift 14s ease-in-out infinite;
+    }
+    @keyframes heroGlowDrift {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-24px, 20px) scale(1.08); }
+    }
+    .hero-text, .hero-card { position: relative; z-index: 1; }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-glow { animation: none; }
     }
     .hero-text h1 {
       font-size: 2.5rem;
@@ -452,6 +476,8 @@
       gap: 1rem;
     }
     .card {
+      position: relative;
+      overflow: hidden;
       background: #fffef5;
       border: 1px solid #e3dfc8;
       border-radius: var(--radius);
@@ -460,6 +486,18 @@
       transition: box-shadow .25s, transform .25s;
       transform-origin: center center;
     }
+    /* Cursor-following spotlight - a soft light that tracks the pointer,
+       shown only on hover (JS sets --mx/--my per pointer position). */
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), rgba(30,58,127,0.10), transparent 70%);
+      opacity: 0;
+      transition: opacity .3s;
+      pointer-events: none;
+    }
+    .card:hover::before { opacity: 1; }
     .card:nth-child(3n+1) { transform: rotate(-0.7deg); }
     .card:nth-child(3n+2) { transform: rotate(0.5deg); }
     .card:nth-child(3n+3) { transform: rotate(-0.4deg); }
@@ -1069,6 +1107,7 @@
 
 <!-- HERO -->
 <div class="hero">
+  <div class="hero-glow" aria-hidden="true"></div>
   <div class="hero-text">
     <h1>הצלחה במתמטיקה,<br/>פיזיקה <span>&</span> מחשבים</h1>
     <p>מורה פרטי בנתניה למתמטיקה, פיזיקה ומחשבים — שיעורים פרטיים מותאמים אישית לכיתות ז׳–י״ב. שיטה ייחודית, סיכומי שיעור, זמינות לאורך כל היום, כלים מקצועיים, תוצאות אמיתיות — פרונטלי או זום.</p>
@@ -1082,9 +1121,9 @@
     <h3>אלירן גלברג</h3>
     <div class="subtitle">מורה פרטי · רמת פולג, נתניה</div>
     <div class="stat-row">
-      <div class="stat"><div class="stat-num">5</div><div class="stat-label">יח׳ מתמטיקה</div></div>
-      <div class="stat"><div class="stat-num">10</div><div class="stat-label">יח׳ מחשבים</div></div>
-      <div class="stat"><div class="stat-num">5</div><div class="stat-label">יח׳ פיזיקה</div></div>
+      <div class="stat"><div class="stat-num" data-count-to="5">0</div><div class="stat-label">יח׳ מתמטיקה</div></div>
+      <div class="stat"><div class="stat-num" data-count-to="10">0</div><div class="stat-label">יח׳ מחשבים</div></div>
+      <div class="stat"><div class="stat-num" data-count-to="5">0</div><div class="stat-label">יח׳ פיזיקה</div></div>
     </div>
     <a href="https://app.elirangelberg.com" class="btn portal-btn">🔑 מעבר לאיזור האישי</a>
   </div>
@@ -1953,6 +1992,44 @@ function openLightboxPDF(src){
         requestAnimationFrame(function () {
           heroEls.forEach(function (el) { if (el) el.classList.add('is-visible'); });
         });
+      });
+    }
+
+    // Cursor spotlight on subject cards - skipped on touch devices (no
+    // meaningful "hover position" there, and it would just leave a stale
+    // spotlight wherever the last tap happened).
+    if (window.matchMedia('(hover: hover)').matches) {
+      document.querySelectorAll('.cards-grid .card').forEach(function (card) {
+        card.addEventListener('mousemove', function (e) {
+          var r = card.getBoundingClientRect();
+          card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+          card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+        });
+      });
+    }
+
+    // Counts the hero stat numbers up from 0 - a small, meaningful touch
+    // (not decoration) that draws the eye to real numbers, same idea as
+    // the count-up already used on the management app's dashboard.
+    var countEls = Array.prototype.slice.call(document.querySelectorAll('.stat-num[data-count-to]'));
+    if (reduceMotion) {
+      countEls.forEach(function (el) { el.textContent = el.getAttribute('data-count-to'); });
+    } else {
+      countEls.forEach(function (el, i) {
+        var target = parseInt(el.getAttribute('data-count-to'), 10) || 0;
+        var duration = 900;
+        var delay = 400 + i * 120;
+        setTimeout(function () {
+          var start = null;
+          function step(ts) {
+            if (start === null) start = ts;
+            var progress = Math.min((ts - start) / duration, 1);
+            var eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.round(eased * target);
+            if (progress < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        }, delay);
       });
     }
   })();
