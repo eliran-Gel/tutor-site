@@ -731,13 +731,22 @@
     }
     .gallery-slide {
       min-width: 100%;
+      height: 500px;
     }
     .gallery-slide img {
       width: 100%;
+      height: 100%;
       display: block;
       border-radius: 14px;
-      max-height: 600px;
-      object-fit: cover; object-position: top;
+      /* The testimonial screenshots come in wildly different aspect ratios
+         (checked: from 0.53 to 2.41 width/height across the set) - without
+         a fixed slide height, the flex row's default stretch behavior made
+         every slide as tall as the tallest one, leaving shorter/wider
+         images looking cut off. A fixed height + object-fit:contain shows
+         every image in full every time, letterboxed on its own background
+         color instead. */
+      object-fit: contain;
+      object-position: center;
       background: #f0ede8;
     }
     .gallery-btn {
@@ -954,6 +963,7 @@
 
       /* GALLERY */
       .gallery-wrapper { max-width: 100%; gap: 0; }
+      .gallery-slide { height: 380px; }
       .gallery-btn {
         position: absolute;
         top: 50%;
