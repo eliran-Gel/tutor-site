@@ -336,43 +336,11 @@
       from { opacity: 0; transform: scale(0.6); }
       to { opacity: 1; transform: scale(1); }
     }
-    /* The pulse is a separate layer that only animates transform/opacity
-       (compositor-only properties) instead of animating box-shadow on the
-       button itself - animating box-shadow forces a repaint on every frame,
-       which is exactly what was causing the scroll jank on mobile (a
-       position:fixed element repainting throughout the whole page, not
-       just near the hero). transform/opacity run on the GPU compositor
-       thread and don't touch layout or paint during scroll. */
-    .floating-wa::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      background: rgba(37,148,92,0.55);
-      z-index: -1;
-      animation: pulseRing 2.4s ease-out 2s infinite;
-    }
-    @keyframes pulseRing {
-      0% { transform: scale(1); opacity: 0.6; }
-      100% { transform: scale(1.7); opacity: 0; }
-    }
-    /* Hero WhatsApp CTA gets the same pulse-ring treatment - scoped to this
-       one class so it doesn't apply to every .btn-primary on the page
-       (pricing, contact form, etc.), just the single highest-intent action
-       above the fold. */
-    .hero-wa-pulse { position: relative; }
-    .hero-wa-pulse::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: rgba(37,148,92,0.4);
-      z-index: -1;
-      animation: pulseRing 2.4s ease-out 2.5s infinite;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .floating-wa::after, .hero-wa-pulse::after { animation: none; display: none; }
-    }
+    /* The pulsing glow ring (tried as a plain box-shadow animation, then as
+       a scaling ::after layer) caused real layout problems on mobile - a
+       transform:scale() pseudo-element on a position:fixed RTL element
+       pushed the whole page sideways on some phones. Not worth chasing
+       further for a decorative touch - removed. Plain static button. */
 
     /* ─── HOW IT WORKS (3 steps) ─── */
     .steps-row { display: flex; justify-content: center; gap: 1.75rem; flex-wrap: wrap; }
@@ -1152,7 +1120,7 @@
     <h1>הצלחה במתמטיקה,<br/>פיזיקה <span>&</span> מחשבים</h1>
     <p>מורה פרטי בנתניה למתמטיקה, פיזיקה ומחשבים — שיעורים פרטיים מותאמים אישית לכיתות ז׳–י״ב. שיטה ייחודית, סיכומי שיעור, זמינות לאורך כל היום, כלים מקצועיים, תוצאות אמיתיות — פרונטלי או זום.</p>
     <div class="hero-btns">
-      <a href="https://wa.me/972586053334" target="_blank" class="btn btn-primary hero-wa-pulse">📲 שלח וואטסאפ</a>
+      <a href="https://wa.me/972586053334" target="_blank" class="btn btn-primary">📲 שלח וואטסאפ</a>
       <a href="#subjects" class="btn btn-outline">גלה את המקצועות</a>
     </div>
   </div>
