@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /bagrut-section-backup.html
+
+Sitemap: https://elirangelberg.com/sitemap.xml
