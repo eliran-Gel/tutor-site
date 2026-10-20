@@ -1,5 +1,6 @@
-/* Scroll guide - see scroll-guide.js. Everything lives in one fixed layer
-   under the nav bar (z-index 90 < nav's 100), so it never covers the menu. */
+/* Scroll guide - see scroll-guide.js.
+   The ruler lives in one fixed layer under the nav bar (z-index 90 < nav's 100),
+   so it never covers the menu. */
 
 .sg-layer {
   position: fixed;
@@ -26,33 +27,6 @@
   mask-image: linear-gradient(to left, #000 45%, rgba(0,0,0,.35) 75%, transparent 100%);
 }
 
-/* Soft frosted corners behind the title stacks (wide screens only). */
-.sg-fade {
-  position: fixed;
-  right: 0;
-  width: 250px;
-  opacity: 0;
-  transition: opacity .35s ease;
-  background: rgba(237, 241, 247, .72);
-  background: color-mix(in srgb, var(--bg) 72%, transparent);
-  -webkit-backdrop-filter: blur(9px);
-  backdrop-filter: blur(9px);
-  display: none;
-}
-.sg-fade-top {
-  top: var(--sg-top, 58px);
-  height: 380px;
-  -webkit-mask-image: radial-gradient(100% 100% at 100% 0%, #000 38%, rgba(0,0,0,.82) 56%, rgba(0,0,0,.48) 72%, rgba(0,0,0,.2) 86%, transparent 97%);
-  mask-image: radial-gradient(100% 100% at 100% 0%, #000 38%, rgba(0,0,0,.82) 56%, rgba(0,0,0,.48) 72%, rgba(0,0,0,.2) 86%, transparent 97%);
-}
-.sg-fade-bottom {
-  bottom: 0;
-  height: 230px;
-  -webkit-mask-image: radial-gradient(100% 100% at 100% 100%, #000 38%, rgba(0,0,0,.82) 56%, rgba(0,0,0,.48) 72%, rgba(0,0,0,.2) 86%, transparent 97%);
-  mask-image: radial-gradient(100% 100% at 100% 100%, #000 38%, rgba(0,0,0,.82) 56%, rgba(0,0,0,.48) 72%, rgba(0,0,0,.2) 86%, transparent 97%);
-}
-.sg-full .sg-fade { display: block; }
-
 /* The ruler itself. Hover/drag only for a mouse - on touch the page scrolls as usual. */
 .sg-rail {
   position: fixed;
@@ -65,35 +39,6 @@
 .sg-rail canvas { display: block; }
 @media (hover: hover) and (pointer: fine) {
   .sg-rail { pointer-events: auto; cursor: crosshair; touch-action: none; }
-}
-
-/* Section names, one span per letter so each can travel on its own. */
-.sg-titles { position: fixed; inset: 0; pointer-events: none; }
-.sg-title {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 0;
-  height: 0;
-  display: block;
-  text-decoration: none;
-}
-.sg-l {
-  position: absolute;
-  left: 0;
-  top: 0;
-  display: block;
-  white-space: pre;
-  line-height: 1;
-  font-family: inherit;
-  font-weight: 800;
-  pointer-events: none;
-  text-shadow: 0 0 3px var(--bg), 0 0 9px var(--bg);
-}
-/* Only titles resting in the stacks are clickable (jump to that section). */
-.sg-full .sg-title.sg-rest .sg-l { pointer-events: auto; cursor: pointer; }
-@media (hover: hover) and (pointer: fine) {
-  .sg-full .sg-title.sg-rest:hover .sg-l { color: var(--accent) !important; }
 }
 
 /* Percentage tag that follows the marker. */
@@ -123,7 +68,30 @@
   opacity: 0;
 }
 
+/* Section titles: each word is a window, each letter springs up into it.
+   Padding/negative margin give descenders room without moving the layout. */
+.sg-word {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  padding: .18em .03em .32em;
+  margin: -.18em -.03em -.32em;
+}
+.sg-ch {
+  display: inline-block;
+  transform: translateY(115%);
+  transition: transform .75s cubic-bezier(.2, .9, .25, 1);
+}
+.sg-split.is-in .sg-ch { transform: none; }
+
+/* The yellow underline draws itself in right after the letters. */
+.sg-split.section-title::after {
+  transform: scaleX(0);
+  transition: transform .6s cubic-bezier(.2, .9, .25, 1) .45s;
+}
+.sg-split.section-title.is-in::after { transform: scaleX(1); }
+
 @media (prefers-reduced-motion: reduce) {
-  .sg-layer, .sg-chip, .sg-fade { transition: none; }
+  .sg-layer, .sg-chip { transition: none; }
 }
 @media print { .sg-layer { display: none; } }
