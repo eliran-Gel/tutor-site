@@ -18,16 +18,21 @@
   var nav = document.querySelector('nav');
 
   /* ====================================================================
-   * Section titles: split into letters, spring them in when scrolled to
+   * Section titles: each letter flies in from the bottom corner of the screen,
+   * up along the edge and curving into its place in the heading. The flight is
+   * tied to the scroll position, so it plays forward and backward as you scroll.
    * ==================================================================== */
   var titles = [];
+  var titleVersion = 0;
+  var INTRO_MS = 1100;   // titles already on screen at load fly in once, on a timer
+  var STAGGER = 0.38;    // how far apart the letters start (share of the flight)
 
   function splitTitle(el) {
     var text = el.textContent.replace(/\s+/g, ' ').trim();
     if (!text) return;
     el.setAttribute('aria-label', text);
     el.textContent = '';
-    var idx = 0;
+    var letters = [];
     text.split(' ').forEach(function (word, w, words) {
       var wordEl = document.createElement('span');
       wordEl.className = 'sg-word';
@@ -36,38 +41,97 @@
         var c = document.createElement('span');
         c.className = 'sg-ch';
         c.textContent = ch;
-        c.style.transitionDelay = Math.min(idx * 38, 700) + 'ms';
-        idx++;
         wordEl.appendChild(c);
+        letters.push(c);
       });
       el.appendChild(wordEl);
-      if (w < words.length - 1) {
-        el.appendChild(document.createTextNode(' '));
-        idx++;
-      }
+      if (w < words.length - 1) el.appendChild(document.createTextNode(' '));
     });
+    el.classList.remove('reveal'); // the letters do the revealing; a fade on top would fight them
     el.classList.add('sg-split');
-    titles.push(el);
-  }
-
-  function revealTitles() {
-    var vh = window.innerHeight;
-    titles = titles.filter(function (el) {
-      var r = el.getBoundingClientRect();
-      // Also catches titles already scrolled past (page reloaded mid-way).
-      if (r.top < vh * 0.88) {
-        el.classList.add('is-in');
-        return false;
-      }
-      return true;
-    });
+    titles.push({ el: el, letters: letters, cx: [], cy: [], docTop: 0, lastP: -1, version: -1, initial: false, locked: false });
   }
 
   if (!reduceMotion) {
     Array.prototype.forEach.call(document.querySelectorAll('.section-title, [data-sg-title]'), splitTitle);
-    // Let the browser paint the hidden state before the first reveal check,
-    // otherwise a title that is already in view would never show the animation.
-    requestAnimationFrame(function () { requestAnimationFrame(revealTitles); });
+  }
+
+  // Where every letter sits when it is at rest (document coordinates).
+  function measureTitles() {
+    var sy = window.pageYOffset, sx = window.pageXOffset;
+    titles.forEach(function (t) {
+      t.letters.forEach(function (l) { l.style.transform = 'none'; });
+      var r = t.el.getBoundingClientRect();
+      t.docTop = r.top + sy;
+      t.letters.forEach(function (l, i) {
+        var lr = l.getBoundingClientRect();
+        t.cx[i] = lr.left + lr.width / 2 + sx;
+        t.cy[i] = lr.top + lr.height / 2 + sy;
+      });
+    });
+    titleVersion++;
+  }
+
+  var introStart = 0, introDone = false;
+  function easeInOut(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function bez(p0, c, p1, t) { var u = 1 - t; return u * u * p0 + 2 * u * t * c + t * t * p1; }
+
+  function flightProgress(t, y, now) {
+    if (t.locked) return 1;
+    var start = vh - 24, end = vh * 0.42;
+    var p = clamp((start - (t.docTop - y)) / (start - end), 0, 1);
+    if (t.initial) {
+      // Already in view when the page opened: fly in once on a timer, then stay put.
+      p = clamp((now - introStart) / INTRO_MS, 0, 1);
+      if (p >= 1) t.locked = true;
+    }
+    return p;
+  }
+
+  function placeTitle(t, p) {
+    var n = t.letters.length;
+    var dockY = vh - 26;
+    var laneX = vw - W / 2;
+    var dockX = vw - W - 14;
+    var sy = window.pageYOffset, sx = window.pageXOffset;
+    for (var k = 0; k < n; k++) {
+      var l = t.letters[k];
+      var d = n > 1 ? STAGGER * (k / (n - 1)) : 0;
+      var raw = clamp((p - d) / (1 - STAGGER), 0, 1);
+      if (raw >= 1) { l.style.transform = ''; l.style.opacity = ''; continue; }
+      var u = easeInOut(raw);
+      var hx = t.cx[k] - sx, hy = t.cy[k] - sy;
+      // Start in a small row at the bottom corner, climb the edge, curve into place.
+      var x = bez(dockX - k * 5, laneX, hx, u);
+      var yy = bez(dockY, hy, hy, u);
+      var rot = lerp(-90, 0, u);
+      var sc = lerp(0.5, 1, u);
+      l.style.transform = 'translate3d(' + (x - hx).toFixed(1) + 'px,' + (yy - hy).toFixed(1) + 'px,0) rotate(' + rot.toFixed(1) + 'deg) scale(' + sc.toFixed(3) + ')';
+      l.style.opacity = clamp(raw * 6, 0, 1).toFixed(2);
+    }
+  }
+
+  function updateTitles(y, now) {
+    var animating = false;
+    titles.forEach(function (t) {
+      var p = flightProgress(t, y, now);
+      var moving = t.initial && !t.locked;
+      if (moving) animating = true;
+      if (p === t.lastP && t.version === titleVersion) return;
+      t.lastP = p;
+      t.version = titleVersion;
+      var flying = p > 0 && p < 1;
+      t.el.classList.toggle('sg-flying', flying);
+      t.el.classList.toggle('is-in', p >= 0.97);
+      if (p <= 0) {
+        // Waiting below the fold: letters are parked and invisible.
+        t.letters.forEach(function (l) { l.style.opacity = '0'; l.style.transform = ''; });
+      } else {
+        placeTitle(t, p);
+      }
+    });
+    return animating;
   }
 
   /* ====================================================================
@@ -106,6 +170,7 @@
   var ctx = canvas.getContext('2d');
   var vw = 0, vh = 0, docH = 1, maxScroll = 1, navH = 58, railH = 0, dpr = 1;
   var wide = false, W = 30;
+  var measuredOnce = false;
   var hoverY = null, dragging = false;
   var raf = 0, idleTimer = 0;
   var TOP_PAD = 14, BOT_PAD = 14;
@@ -133,6 +198,16 @@
       canvas.height = ch;
       canvas.style.width = W + 'px';
       canvas.style.height = railH + 'px';
+    }
+    if (titles.length) {
+      var first = !measuredOnce;
+      measureTitles();
+      if (first) {
+        measuredOnce = true;
+        introStart = performance.now() + 150;
+        var y0 = window.pageYOffset;
+        if (y0 < 5) titles.forEach(function (t) { t.initial = (t.docTop - y0) < vh - 24; });
+      }
     }
     schedule();
   }
@@ -219,7 +294,7 @@
     var s = clamp(window.pageYOffset / maxScroll, 0, 1);
     drawRuler(s);
     updateChips(s);
-    if (titles.length) revealTitles();
+    if (titles.length && updateTitles(window.pageYOffset, performance.now())) schedule();
   }
 
   function onScroll() {

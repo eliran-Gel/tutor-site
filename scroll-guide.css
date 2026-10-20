@@ -68,21 +68,13 @@
   opacity: 0;
 }
 
-/* Section titles: each word is a window, each letter springs up into it.
-   Padding/negative margin give descenders room without moving the layout. */
-.sg-word {
-  display: inline-block;
-  vertical-align: top;
-  overflow: hidden;
-  padding: .18em .03em .32em;
-  margin: -.18em -.03em -.32em;
-}
-.sg-ch {
-  display: inline-block;
-  transform: translateY(115%);
-  transition: transform .75s cubic-bezier(.2, .9, .25, 1);
-}
-.sg-split.is-in .sg-ch { transform: none; }
+/* Section titles: each letter is its own box so it can fly on its own.
+   While a title is in flight it sits above the page content so later
+   sections can't cover the letters. */
+.sg-word { display: inline-block; white-space: nowrap; }
+.sg-ch { display: inline-block; will-change: transform; }
+.sg-split.sg-flying { position: relative; z-index: 80; }
+.sg-flying .sg-ch { text-shadow: 0 0 3px var(--bg), 0 0 8px var(--bg); }
 
 /* The yellow underline draws itself in right after the letters. */
 .sg-split.section-title::after {
