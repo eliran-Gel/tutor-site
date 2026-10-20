@@ -1,0 +1,129 @@
+/* Scroll guide - see scroll-guide.js. Everything lives in one fixed layer
+   under the nav bar (z-index 90 < nav's 100), so it never covers the menu. */
+
+.sg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .6s ease .2s;
+}
+.sg-ready .sg-layer { opacity: 1; }
+
+/* Frosted strip behind the ruler so ticks stay readable over any content. */
+.sg-rail-bg {
+  position: fixed;
+  top: var(--sg-top, 58px);
+  right: 0;
+  bottom: 0;
+  width: var(--sg-w, 30px);
+  background: rgba(237, 241, 247, .45);
+  background: color-mix(in srgb, var(--bg) 45%, transparent);
+  -webkit-backdrop-filter: blur(9px);
+  backdrop-filter: blur(9px);
+  -webkit-mask-image: linear-gradient(to left, #000 45%, rgba(0,0,0,.35) 75%, transparent 100%);
+  mask-image: linear-gradient(to left, #000 45%, rgba(0,0,0,.35) 75%, transparent 100%);
+}
+
+/* Soft frosted corners behind the title stacks (wide screens only). */
+.sg-fade {
+  position: fixed;
+  right: 0;
+  width: 250px;
+  opacity: 0;
+  transition: opacity .35s ease;
+  background: rgba(237, 241, 247, .72);
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  -webkit-backdrop-filter: blur(9px);
+  backdrop-filter: blur(9px);
+  display: none;
+}
+.sg-fade-top {
+  top: var(--sg-top, 58px);
+  height: 380px;
+  -webkit-mask-image: radial-gradient(100% 100% at 100% 0%, #000 38%, rgba(0,0,0,.82) 56%, rgba(0,0,0,.48) 72%, rgba(0,0,0,.2) 86%, transparent 97%);
+  mask-image: radial-gradient(100% 100% at 100% 0%, #000 38%, rgba(0,0,0,.82) 56%, rgba(0,0,0,.48) 72%, rgba(0,0,0,.2) 86%, transparent 97%);
+}
+.sg-fade-bottom {
+  bottom: 0;
+  height: 230px;
+  -webkit-mask-image: radial-gradient(100% 100% at 100% 100%, #000 38%, rgba(0,0,0,.82) 56%, rgba(0,0,0,.48) 72%, rgba(0,0,0,.2) 86%, transparent 97%);
+  mask-image: radial-gradient(100% 100% at 100% 100%, #000 38%, rgba(0,0,0,.82) 56%, rgba(0,0,0,.48) 72%, rgba(0,0,0,.2) 86%, transparent 97%);
+}
+.sg-full .sg-fade { display: block; }
+
+/* The ruler itself. Hover/drag only for a mouse - on touch the page scrolls as usual. */
+.sg-rail {
+  position: fixed;
+  top: var(--sg-top, 58px);
+  right: 0;
+  bottom: 0;
+  width: var(--sg-w, 30px);
+  pointer-events: none;
+}
+.sg-rail canvas { display: block; }
+@media (hover: hover) and (pointer: fine) {
+  .sg-rail { pointer-events: auto; cursor: crosshair; touch-action: none; }
+}
+
+/* Section names, one span per letter so each can travel on its own. */
+.sg-titles { position: fixed; inset: 0; pointer-events: none; }
+.sg-title {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  display: block;
+  text-decoration: none;
+}
+.sg-l {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  white-space: pre;
+  line-height: 1;
+  font-family: inherit;
+  font-weight: 800;
+  pointer-events: none;
+  text-shadow: 0 0 3px var(--bg), 0 0 9px var(--bg);
+}
+/* Only titles resting in the stacks are clickable (jump to that section). */
+.sg-full .sg-title.sg-rest .sg-l { pointer-events: auto; cursor: pointer; }
+@media (hover: hover) and (pointer: fine) {
+  .sg-full .sg-title.sg-rest:hover .sg-l { color: var(--accent) !important; }
+}
+
+/* Percentage tag that follows the marker. */
+.sg-chip {
+  position: fixed;
+  top: 0;
+  right: calc(var(--sg-w, 30px) + 4px);
+  min-width: 38px;
+  padding: 1px 7px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  font: 700 11px/18px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  direction: ltr;
+  box-shadow: 0 2px 8px rgba(30, 58, 127, .28);
+  transition: opacity .35s ease;
+  will-change: transform;
+}
+.sg-chip.is-idle { opacity: .6; }
+.sg-chip-hover {
+  background: #fff;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0 6px;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sg-layer, .sg-chip, .sg-fade { transition: none; }
+}
+@media print { .sg-layer { display: none; } }
